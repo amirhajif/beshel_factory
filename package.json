@@ -11,7 +11,14 @@
   "dependencies": {
     "react": "^18",
     "react-dom": "^18",
-    "next": "14.0.2"
+    "next": "14.0.2",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.14.8",
+    "@mui/material": "^5.14.8",
+    "@uidotdev/usehooks": "^2.2.0",
+    "sharp": "^0.32.6",
+    "sweetalert2": "^11.7.28"
   },
   "devDependencies": {
     "autoprefixer": "^10.0.1",

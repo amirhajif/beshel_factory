@@ -1,9 +1,8 @@
-import Image from 'next/image'
+import React from "react";
+import LoginForm from "@/components/templates/LoginForm";
 
-export default function Home() {
-  return (
-    <main >
-      <div>hello</div>
-    </main>
-  )
-}
+const page = () => {
+  return <LoginForm />;
+};
+
+export default page;

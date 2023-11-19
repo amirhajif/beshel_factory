@@ -1,3 +1,73 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: "vazir";
+  src: url("../assets/fonts/Vazir-FD-WOL.woff");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "vazir";
+  src: url("../assets/fonts/Vazir-Bold-FD-WOL.woff");
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "vazir";
+  src: url("../assets/fonts/Vazir-Light-FD-WOL.woff");
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: "vazir";
+  src: url("../assets/fonts/Vazir-Medium-FD-WOL.woff");
+  font-weight: 500;
+}
+
+* {
+  font-family: "vazir";
+  font-weight: 400;
+}
+
+.Mui-selected {
+  color: white;
+  font-family: "vazir" !important;
+  font-size: 0.75rem !important;
+  line-height: 1rem;
+}
+.MuiBottomNavigationAction-label {
+  font-family: "vazir" !important;
+  font-size: 0.75rem !important;
+  line-height: 1rem;
+}
+
+.costume-scroll::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+.costume-scroll {
+  overflow-y: scroll;
+  overflow-x: auto;
+}
+/* Track */
+.costume-scroll::-webkit-scrollbar-track {
+  @apply bg-indigo-200;
+  border-radius: 10px;
+  width: 5px;
+}
+
+/* Handle */
+.costume-scroll::-webkit-scrollbar-thumb {
+  @apply bg-indigo-950;
+  border-radius: 10px;
+  width: 5px;
+}
+
+/* Handle on hover */
+.costume-scroll::-webkit-scrollbar-thumb:hover {
+  background: #555;
+  width: 5px;
+}
