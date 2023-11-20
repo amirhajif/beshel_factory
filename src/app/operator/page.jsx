@@ -4,15 +4,15 @@ import React from "react";
 import DesktopDasboard from "@/components/templates/Dashboard/DesktopDasboard";
 import MobileDashboard from "@/components/templates/Dashboard/MobileDashboard";
 import { useWindowSize } from "@uidotdev/usehooks";
-import AdminNavbarItems from "@/constants/AdminNavbarItems";
+import OperatorNavbarItems from "@/constants/OperatorNavbarItems";
 import DashboardContent from "@/components/layouts/DashboardContent";
 import AuthProvider from "@/components/layouts/AuthProvider";
 
-const AddUser = () => {
+const Operator = () => {
   const { width } = useWindowSize();
   return width < 768 ? (
     <AuthProvider>
-      <MobileDashboard navItems={AdminNavbarItems}>
+      <MobileDashboard navItems={OperatorNavbarItems}>
         <DashboardContent>
           <p>محتوای صفحه</p>
         </DashboardContent>
@@ -20,7 +20,7 @@ const AddUser = () => {
     </AuthProvider>
   ) : (
     <AuthProvider>
-      <DesktopDasboard navItems={AdminNavbarItems}>
+      <DesktopDasboard navItems={OperatorNavbarItems}>
         <DashboardContent>
           <p>محتوای صفحه</p>
         </DashboardContent>
@@ -29,4 +29,4 @@ const AddUser = () => {
   );
 };
 
-export default AddUser;
+export default Operator;

@@ -4,15 +4,16 @@ import React from "react";
 import DesktopDasboard from "@/components/templates/Dashboard/DesktopDasboard";
 import MobileDashboard from "@/components/templates/Dashboard/MobileDashboard";
 import { useWindowSize } from "@uidotdev/usehooks";
-import AdminNavbarItems from "@/constants/AdminNavbarItems";
+import PlannerNavbarItems from "@/constants/PlannerNavbarItems";
 import DashboardContent from "@/components/layouts/DashboardContent";
 import AuthProvider from "@/components/layouts/AuthProvider";
 
-const Leavage = () => {
+const Planner = () => {
   const { width } = useWindowSize();
+
   return width < 768 ? (
     <AuthProvider>
-      <MobileDashboard navItems={AdminNavbarItems}>
+      <MobileDashboard navItems={PlannerNavbarItems}>
         <DashboardContent>
           <p>محتوای صفحه</p>
         </DashboardContent>
@@ -20,7 +21,7 @@ const Leavage = () => {
     </AuthProvider>
   ) : (
     <AuthProvider>
-      <DesktopDasboard navItems={AdminNavbarItems}>
+      <DesktopDasboard navItems={PlannerNavbarItems}>
         <DashboardContent>
           <p>محتوای صفحه</p>
         </DashboardContent>
@@ -29,4 +30,4 @@ const Leavage = () => {
   );
 };
 
-export default Leavage;
+export default Planner;
