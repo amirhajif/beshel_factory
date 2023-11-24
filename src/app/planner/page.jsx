@@ -7,7 +7,9 @@ import { useWindowSize } from "@uidotdev/usehooks";
 import PlannerNavbarItems from "@/constants/PlannerNavbarItems";
 import DashboardContent from "@/components/layouts/DashboardContent";
 import AuthProvider from "@/components/layouts/AuthProvider";
-
+import Table from "@/components/shared/Table";
+import ReportsMocksData from "@/mocks/ReportsMocksData";
+import ReportsDetailedTableHeaders from "@/constants/ReportsDetailedTableHeaders";
 const Planner = () => {
   const { width } = useWindowSize();
 
@@ -15,7 +17,10 @@ const Planner = () => {
     <AuthProvider>
       <MobileDashboard navItems={PlannerNavbarItems}>
         <DashboardContent>
-          <p>محتوای صفحه</p>
+          <Table
+            headers={ReportsDetailedTableHeaders}
+            datas={ReportsMocksData}
+          />
         </DashboardContent>
       </MobileDashboard>
     </AuthProvider>
@@ -23,7 +28,10 @@ const Planner = () => {
     <AuthProvider>
       <DesktopDasboard navItems={PlannerNavbarItems}>
         <DashboardContent>
-          <p>محتوای صفحه</p>
+          <Table
+            headers={ReportsDetailedTableHeaders}
+            datas={ReportsMocksData}
+          />
         </DashboardContent>
       </DesktopDasboard>
     </AuthProvider>
