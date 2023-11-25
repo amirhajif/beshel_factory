@@ -1,7 +1,8 @@
 import createTdFromObject from "@/utils/createTdFromObject";
+import ReportStatus from "@/constants/ReportStatus";
 const Table = ({ headers, datas }) => {
   return (
-    <div className="overflow-x-scroll xs:w-[100%] w-[95%]">
+    <div className="costume-scroll overflow-scroll xs:w-[100%] w-[95%] h-[90%]">
       <table className="text-sm">
         <thead className="border-b dark:border-neutral-500 text-slate-50 bg-slate-500">
           <tr className="text-center">
@@ -22,7 +23,7 @@ const Table = ({ headers, datas }) => {
               className={`border-b dark:border-neutral-500 text-xs text-center ${
                 index % 2 === 1 ? "bg-slate-300" : "bg-slate-100"
               }`}>
-              {createTdFromObject(item, index)}
+              {createTdFromObject(item, index, "status", ReportStatus?.Pending)}
             </tr>
           ))}
         </tbody>

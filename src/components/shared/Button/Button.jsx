@@ -9,7 +9,7 @@ const Button = ({
   disabled = null,
 }) => {
   let defaultButtonClassName = `bg-indigo-950 text-slate-50 rounded-lg p-2 ${
-    extraClasses && extraClasses
+    extraClasses ? extraClasses : ""
   }`;
 
   return (
