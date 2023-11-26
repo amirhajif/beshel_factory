@@ -9,7 +9,7 @@ export const generateMetadata = async ({ params }) => {
 
 const Report = async ({ params }) => {
   const { id } = params || "";
-  return <div>page with id {id}</div>;
+  return <div>صفحه گزارش شماره {id}</div>;
 };
 
 export default Report;

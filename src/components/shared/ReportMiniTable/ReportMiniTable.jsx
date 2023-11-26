@@ -1,6 +1,7 @@
 import createTdFromObject from "@/utils/createTdFromObject";
 import ReportStatus from "@/constants/ReportStatus";
-const ReportMiniTable = ({ headers, datas }) => {
+import Button from "@/components/shared/Button";
+const ReportMiniTable = ({ headers, datas, callback }) => {
   return (
     <div className="costume-scroll overflow-scroll xs:w-[100%] w-[95%] h-[90%]">
       <table className="text-sm w-[100%]">
@@ -19,11 +20,19 @@ const ReportMiniTable = ({ headers, datas }) => {
         <tbody>
           {datas.map((item, index) => (
             <tr
-              key={item._id}
+              key={item.id}
               className={`border-b dark:border-neutral-500 text-xs text-center ${
                 index % 2 === 1 ? "bg-slate-300" : "bg-slate-100"
               }`}>
-              {createTdFromObject(item, index, "dummy", "")}
+              {createTdFromObject(
+                item,
+                index,
+                "dummy",
+                "",
+                <Button onClickCallback={() => callback(item)}>
+                  مشاهده گزارش
+                </Button>
+              )}
             </tr>
           ))}
         </tbody>

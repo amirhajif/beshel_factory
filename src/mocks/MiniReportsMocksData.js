@@ -25,7 +25,7 @@ export const MiniReportsMocksData = [
     dummy: "",
   },
   {
-    id: "123456789",
+    id: "123456782",
     date: "1402/11/11",
     operator: "رضا رضایی",
     machine: "ME-4",
@@ -33,7 +33,7 @@ export const MiniReportsMocksData = [
     dummy: "",
   },
   {
-    id: "123456780",
+    id: "123456783",
     date: "1402/11/12",
     operator: "علی علیپور",
     machine: "ME-5",
@@ -41,7 +41,7 @@ export const MiniReportsMocksData = [
     dummy: "",
   },
   {
-    id: "123456781",
+    id: "123456784",
     date: "1402/11/13",
     operator: "حسن حسنپور",
     machine: "ME-6",

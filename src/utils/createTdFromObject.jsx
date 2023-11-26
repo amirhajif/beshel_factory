@@ -4,7 +4,7 @@ export const createTdFromObject = (
   index,
   speceficKey = null,
   speceficValue = null,
-  callback = null,
+  speceficComponent,
   className = "whitespace-nowrap px-6 py-4"
 ) => {
   let datas = [<td className={`${className} font-bold`}>{index + 1}</td>];
@@ -19,7 +19,7 @@ export const createTdFromObject = (
             </>
           )}
           <p className="flex justify-center items-center gap-5 mt-2">
-            <Button>مشاهده گزارش</Button>
+            {speceficComponent}
           </p>
         </td>
       );
