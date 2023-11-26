@@ -7,10 +7,10 @@ const Button = ({
   onClickCallback = null,
   className = null,
   disabled = null,
+  required = false
 }) => {
-  let defaultButtonClassName = `bg-indigo-950 text-slate-50 rounded-lg p-2 ${
-    extraClasses ? extraClasses : ""
-  }`;
+  let defaultButtonClassName = `bg-indigo-950 text-slate-50 rounded-lg p-2 ${extraClasses ? extraClasses : ""
+    }`;
 
   return (
     <button

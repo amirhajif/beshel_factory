@@ -8,9 +8,8 @@ const TextField = ({
   className = null,
   type = null,
 }) => {
-  let defaultButtonClassName = `focus:outline-none p-3 w-[100%] rounded-lg  border-transparent border-2 focus:border-indigo-900 focus:border-2 text-indigo-900 ${
-    extraClasses && extraClasses
-  }`;
+  let defaultButtonClassName = `focus:outline-none p-3 w-[100%] rounded-lg  border-transparent border-2 focus:border-indigo-900 focus:border-2 text-indigo-900 ${extraClasses && extraClasses
+    }`;
 
   return (
     <input
