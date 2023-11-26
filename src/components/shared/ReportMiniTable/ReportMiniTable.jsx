@@ -1,6 +1,6 @@
 import createTdFromObject from "@/utils/createTdFromObject";
 import ReportStatus from "@/constants/ReportStatus";
-const Table = ({ headers, datas }) => {
+const ReportMiniTable = ({ headers, datas }) => {
   return (
     <div className="costume-scroll overflow-scroll xs:w-[100%] w-[95%] h-[90%]">
       <table className="text-sm w-[100%]">
@@ -23,7 +23,7 @@ const Table = ({ headers, datas }) => {
               className={`border-b dark:border-neutral-500 text-xs text-center ${
                 index % 2 === 1 ? "bg-slate-300" : "bg-slate-100"
               }`}>
-              {createTdFromObject(item, index, "status", ReportStatus?.Pending)}
+              {createTdFromObject(item, index, "dummy", "")}
             </tr>
           ))}
         </tbody>
@@ -32,4 +32,4 @@ const Table = ({ headers, datas }) => {
   );
 };
 
-export default Table;
+export default ReportMiniTable;

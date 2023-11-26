@@ -10,6 +10,11 @@ import AuthProvider from "@/components/layouts/AuthProvider";
 import Table from "@/components/shared/Table";
 import ReportsMocksData from "@/mocks/ReportsMocksData";
 import ReportsDetailedTableHeaders from "@/constants/ReportsDetailedTableHeaders";
+
+import MiniReportsMocksData from "@/mocks/MiniReportsMocksData";
+import ReportsTableHeaders from "@/constants/ReportsTableHeaders";
+import ReportMiniTable from "@/components/shared/ReportMiniTable";
+
 const Planner = () => {
   const { width } = useWindowSize();
 
@@ -17,9 +22,9 @@ const Planner = () => {
     <AuthProvider>
       <MobileDashboard navItems={PlannerNavbarItems}>
         <DashboardContent>
-          <Table
-            headers={ReportsDetailedTableHeaders}
-            datas={ReportsMocksData}
+          <ReportMiniTable
+            headers={ReportsTableHeaders}
+            datas={MiniReportsMocksData}
           />
         </DashboardContent>
       </MobileDashboard>
@@ -28,9 +33,9 @@ const Planner = () => {
     <AuthProvider>
       <DesktopDasboard navItems={PlannerNavbarItems}>
         <DashboardContent>
-          <Table
-            headers={ReportsDetailedTableHeaders}
-            datas={ReportsMocksData}
+          <ReportMiniTable
+            headers={ReportsTableHeaders}
+            datas={MiniReportsMocksData}
           />
         </DashboardContent>
       </DesktopDasboard>

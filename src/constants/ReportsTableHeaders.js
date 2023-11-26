@@ -1,3 +1,11 @@
-export const ReportsTableHeaders = ["ردیف", "شناسه", "تاریخ", "اپراتور", "..."];
+export const ReportsTableHeaders = [
+  "ردیف",
+  "شناسه",
+  "تاریخ",
+  "اپراتور",
+  "ماشین",
+  "وضعیت",
+  "...",
+];
 
 export default ReportsTableHeaders;
