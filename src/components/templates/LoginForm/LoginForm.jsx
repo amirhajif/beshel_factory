@@ -34,7 +34,7 @@ const LoginForm = () => {
     )?.value;
 
     try {
-    } catch (error) {}
+    } catch (error) { }
   };
   return (
     <div className="flex p-2 flex-col w-100 h-[100vh] bg-slate-200 items-center justify-center gap-10">

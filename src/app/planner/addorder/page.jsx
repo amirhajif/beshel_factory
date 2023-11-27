@@ -11,8 +11,48 @@ import AuthProvider from "@/components/layouts/AuthProvider";
 import Button from "@/components/shared/Button";
 import InputSection from "@/components/shared/InputSection";
 import PlannerAddOrderInputs from "@/constants/PlannerAddOrderInputs";
+import AddOrderFormFields from "@/models/AddOrderFormFields";
 
 const Addorder = () => {
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    let formsElements = e.target.elements;
+
+    let productName = formsElements.namedItem(
+      AddOrderFormFields?.productName?.title
+    )?.value;
+    let companyName = formsElements.namedItem(
+      AddOrderFormFields?.companyName?.title
+    )?.value;
+    let startDay = formsElements.namedItem(
+      AddOrderFormFields?.startDay?.title
+    )?.value
+    let startMonth = formsElements.namedItem(
+      AddOrderFormFields?.startMonth?.title
+    )?.value
+    let startYear = formsElements.namedItem(
+      AddOrderFormFields?.startYear?.title
+    )?.value
+    let finishDay = formsElements.namedItem(
+      AddOrderFormFields?.finishDay?.title
+    )?.value
+    let finishMonth = formsElements.namedItem(
+      AddOrderFormFields?.finishMonth?.title
+    )?.value
+    let finishYear = formsElements.namedItem(
+      AddOrderFormFields?.finishYear?.title
+    )?.value
+    let count = formsElements.namedItem(
+      AddOrderFormFields?.count?.title
+    )?.value
+
+    // build Date Values
+    const startDate = startYear + "/" + startMonth + "/" + startDay
+    const finishDate = finishYear + "/" + finishMonth + "/" + finishYear
+
+  }
+
   const { width } = useWindowSize();
   return width < 768 ? (
     <AuthProvider>
@@ -26,8 +66,8 @@ const Addorder = () => {
     <AuthProvider>
       <DesktopDasboard navItems={PlannerNavbarItems}>
         <DashboardContent>
-          <form className="w-full max-w-lg flex flex-wrap -mx-3 mb-6">
-            {PlannerAddOrderInputs.map((input) => (
+          <form className="w-full max-w-lg flex flex-wrap -mx-3 mb-6" onSubmit={handleSubmit}>
+            {PlannerAddOrderInputs.map(input => (
               < InputSection
                 key={input.name}
                 parentClassName={input.parentClassName}
