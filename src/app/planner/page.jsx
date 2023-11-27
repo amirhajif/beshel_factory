@@ -42,6 +42,7 @@ const Planner = () => {
     <AuthProvider>
       <DesktopDasboard navItems={PlannerNavbarItems}>
         <DashboardContent>
+
           <ReportMiniTable
             headers={ReportsTableHeaders}
             datas={MiniReportsMocksData}
