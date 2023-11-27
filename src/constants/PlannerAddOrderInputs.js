@@ -27,7 +27,7 @@ export const PlannerAddOrderInputs = [
         inputClassName: "appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white",
         forValue: 'start_day',
         text: "روز شروع",
-        name: "company_name",
+        name: "start_day",
         id: "start_day",
         placeholder: "۵"
     },
@@ -37,6 +37,7 @@ export const PlannerAddOrderInputs = [
         inputClassName: "appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white",
         forValue: "start_month",
         text: "ماه شروع ",
+        name: "start_month",
         id: "start_month",
         placeholder: "۹"
     },
@@ -47,6 +48,7 @@ export const PlannerAddOrderInputs = [
         forValue: "start_year",
         text: "سال شروع",
         id: "start_year",
+        name: "start_year",
         placeholder: "۱۴۰۲"
     },
     {
@@ -56,6 +58,7 @@ export const PlannerAddOrderInputs = [
         forValue: "finish_day",
         text: "روز پایان",
         id: "finish_day",
+        name: "finish_day",
         placeholder: "۱۵"
     },
     {
@@ -65,6 +68,7 @@ export const PlannerAddOrderInputs = [
         forValue: "finish_month",
         text: "ماه پایان",
         id: "finish_month",
+        name: "finish_month",
         placeholder: "۱۰"
     },
     {
@@ -73,6 +77,7 @@ export const PlannerAddOrderInputs = [
         inputClassName: "appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white",
         forValue: "finish_year",
         text: "سال پایان",
+        name: "finish_year",
         id: "finish_year",
         placeholder: "۱۴۰۲"
     },
@@ -82,15 +87,10 @@ export const PlannerAddOrderInputs = [
         inputClassName: "appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white",
         forValue: "count",
         text: "تعداد قطعه",
+        name: "count",
         id: "count",
         placeholder: "۱۵"
     }
-
-
-    // <div className="w-full md:w-2/3 px-3 mb-6 md:mb-0">
-    //     <Button className="bg-transparent hover:bg-green-500 w-full text-green-700 font-semibold hover:text-white mt-6  py-3 px-4 border border-green-500 hover:border-transparent rounded">ثبت سفارش</Button>
-    // </div>
-
 ]
 
 export default PlannerAddOrderInputs
