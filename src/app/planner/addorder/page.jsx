@@ -15,6 +15,9 @@ import PlannerAddOrderInputs from "@/constants/PlannerAddOrderInputs";
 
 const Addorder = () => {
   const { width } = useWindowSize();
+
+
+
   return width < 768 ? (
     <AuthProvider>
       <MobileDashboard navItems={PlannerNavbarItems}>
@@ -27,7 +30,7 @@ const Addorder = () => {
     <AuthProvider>
       <DesktopDasboard navItems={PlannerNavbarItems}>
         <DashboardContent>
-          <form className="w-full max-w-lg flex flex-wrap -mx-3 mb-6">
+          <form className="w-full max-w-lg flex flex-wrap -mx-3 mb-6" onSubmit={onSubmit}>
             {PlannerAddOrderInputs.map((input) => (
               < InputSection
                 parentClassName={input.parentClassName}
