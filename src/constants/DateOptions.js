@@ -1,5 +1,9 @@
 export const DateOptions = [
     {
+        'value': 'all',
+        'text': 'همه'
+    },
+    {
         'value': 'today',
         'text': 'امروز'
     },

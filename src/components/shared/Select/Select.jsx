@@ -1,4 +1,5 @@
 import React from 'react'
+import Label from '../Label'
 
 const Select = ({
     parentClassName,
@@ -11,9 +12,8 @@ const Select = ({
 }) => {
     return (
         <div className={parentClassName}>
-            <label className={labelClassName} htmlFor={forValue}>
-                {text}
-            </label>
+
+            <Label className={labelClassName} forValue={forValue} text={text} />
             <div className="relative">
                 <select className={selectClassName} id={selectId}>
                     {options.map((option) => (

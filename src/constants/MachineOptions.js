@@ -1,5 +1,9 @@
 export const MachineOptions = [
     {
+        'value': 'all',
+        'text': 'همه'
+    },
+    {
         'value': 'me-1',
         'text': 'ME-1'
     },
