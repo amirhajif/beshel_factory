@@ -8,14 +8,10 @@ import MobileDashboard from "@/components/templates/Dashboard/MobileDashboard";
 import PlannerNavbarItems from "@/constants/PlannerNavbarItems";
 import DashboardContent from "@/components/layouts/DashboardContent";
 import AuthProvider from "@/components/layouts/AuthProvider";
-import Table from "@/components/shared/Table";
-import ReportsMocksData from "@/mocks/ReportsMocksData";
-import ReportsDetailedTableHeaders from "@/constants/ReportsDetailedTableHeaders";
 
 import MiniReportsMocksData from "@/mocks/MiniReportsMocksData";
 import ReportsTableHeaders from "@/constants/ReportsTableHeaders";
 import ReportMiniTable from "@/components/shared/ReportMiniTable";
-import Filter from "@/components/shared/Filter";
 
 const Planner = () => {
   const { width } = useWindowSize();
@@ -43,7 +39,6 @@ const Planner = () => {
     <AuthProvider>
       <DesktopDasboard navItems={PlannerNavbarItems}>
         <DashboardContent>
-          <Filter />
           <ReportMiniTable
             headers={ReportsTableHeaders}
             datas={MiniReportsMocksData}
