@@ -1,6 +1,6 @@
 export const DateOptions = [
     {
-        'value': 'all',
+        'value': '',
         'text': 'همه'
     },
     {

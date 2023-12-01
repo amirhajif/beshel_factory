@@ -1,6 +1,6 @@
 export const MachineOptions = [
     {
-        'value': 'all',
+        'value': '',
         'text': 'همه'
     },
     {

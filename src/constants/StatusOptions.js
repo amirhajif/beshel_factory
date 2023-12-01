@@ -1,6 +1,6 @@
 export const StatusOptions = [
     {
-        'value': 'all',
+        'value': '',
         'text': 'همه'
     },
     {

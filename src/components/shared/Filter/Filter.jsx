@@ -33,9 +33,9 @@ const Filter = () => {
         console.log(status, date, machine)
 
         const params = new URLSearchParams(searchParams)
-        params.set('status', status)
-        params.set('date', date)
-        params.set('machine', machine)
+        status != '' ? params.set('status', status) : params.delete('status')
+        date != '' ? params.set('date', date) : params.delete('date')
+        machine != '' ? params.set('machine', machine) : params.delete('machine')
         replace(`${pathname}?${params}`);
     }
 
