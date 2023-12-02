@@ -12,7 +12,6 @@ const Select = ({
 }) => {
     return (
         <div className={parentClassName}>
-
             <Label className={labelClassName} forValue={forValue} text={text} />
             <div className="relative">
                 <select className={selectClassName} id={selectId}>
