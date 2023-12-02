@@ -21,7 +21,7 @@ const SupervisorTable = ({ headers, datas, callback }) => {
         <tbody>
           {datas.map((item, index) => (
             <tr
-              key={item._id}
+              key={`${item.id}_index`}
               className={`border-b dark:border-neutral-500 text-xs text-center ${
                 index % 2 === 1 ? "bg-slate-300" : "bg-slate-100"
               }`}>

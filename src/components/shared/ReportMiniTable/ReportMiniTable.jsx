@@ -1,9 +1,8 @@
 import createTdFromObject from "@/utils/createTdFromObject";
-import ReportStatus from "@/constants/ReportStatus";
 import Button from "@/components/shared/Button";
 import Filter from "@/components/shared/Filter";
-
-const ReportMiniTable = ({ headers, datas, callback }) => {
+import Link from "next/link";
+const ReportMiniTable = ({ headers, datas, baseRoute }) => {
   return (
     <div className="costume-scroll overflow-scroll xs:w-[100%] w-[95%] h-[90%]">
       <Filter />
@@ -24,7 +23,7 @@ const ReportMiniTable = ({ headers, datas, callback }) => {
         <tbody>
           {datas.map((item, index) => (
             <tr
-              key={item.id}
+              key={`${item.id}_index`}
               className={`border-b dark:border-neutral-500 text-xs text-center ${
                 index % 2 === 1 ? "bg-slate-300" : "bg-slate-100"
               }`}>
@@ -33,8 +32,8 @@ const ReportMiniTable = ({ headers, datas, callback }) => {
                 index,
                 "dummy",
                 "",
-                <Button onClickCallback={() => callback(item)}>
-                  مشاهده گزارش
+                <Button>
+                  <Link href={`${baseRoute}/${item?.id}`}> مشاهده گزارش</Link>
                 </Button>
               )}
             </tr>

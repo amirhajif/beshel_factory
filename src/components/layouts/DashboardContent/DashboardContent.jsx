@@ -1,5 +1,3 @@
-import React from "react";
-
 const DashboardContent = ({ children }) => {
   return (
     <div className="md:w-[85%] w-[100%] p-3 mt-3">

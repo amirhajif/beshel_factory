@@ -1,4 +1,5 @@
 import "./globals.css";
+import AuthProvider from "@/components/layouts/AuthProvider";
 
 export const metadata = {
   title: "پروژه بشل",
@@ -8,7 +9,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="fa" dir="rtl">
-      <body>{children}</body>
+      <body>
+        <AuthProvider>{children}</AuthProvider>
+      </body>
     </html>
   );
 }
