@@ -1,20 +1,37 @@
 "use client";
+import { useWindowSize } from "@uidotdev/usehooks";
+import { useRouter } from "next/navigation";
 
-import React from "react";
 import DesktopDasboard from "@/components/templates/Dashboard/DesktopDasboard";
 import MobileDashboard from "@/components/templates/Dashboard/MobileDashboard";
-import { useWindowSize } from "@uidotdev/usehooks";
+
 import SupervisorNavbarItems from "@/constants/SupervisorNavbarItems";
 import DashboardContent from "@/components/layouts/DashboardContent";
 import AuthProvider from "@/components/layouts/AuthProvider";
 
-const Supervisor = () => {
+import MiniReportsMocksData from "@/mocks/MiniReportsMocksData";
+import ReportsTableHeaders from "@/constants/ReportsTableHeaders";
+import ReportMiniTable from "@/components/shared/ReportMiniTable";
+
+const Planner = () => {
   const { width } = useWindowSize();
+  const router = useRouter();
+
+  const seeReportCallback = (item) => {
+    const { id } = item || "";
+
+    router?.push(`supervisor/${id}`);
+  };
+
   return width < 768 ? (
     <AuthProvider>
       <MobileDashboard navItems={SupervisorNavbarItems}>
         <DashboardContent>
-          <p>محتوای صفحه</p>
+          <ReportMiniTable
+            headers={ReportsTableHeaders}
+            datas={MiniReportsMocksData}
+            callback={seeReportCallback}
+          />
         </DashboardContent>
       </MobileDashboard>
     </AuthProvider>
@@ -22,11 +39,15 @@ const Supervisor = () => {
     <AuthProvider>
       <DesktopDasboard navItems={SupervisorNavbarItems}>
         <DashboardContent>
-          <p>محتوای صفحه</p>
+          <ReportMiniTable
+            headers={ReportsTableHeaders}
+            datas={MiniReportsMocksData}
+            callback={seeReportCallback}
+          />
         </DashboardContent>
       </DesktopDasboard>
     </AuthProvider>
   );
 };
 
-export default Supervisor;
+export default Planner;
