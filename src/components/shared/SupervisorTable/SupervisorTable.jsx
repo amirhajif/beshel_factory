@@ -2,7 +2,7 @@ import createTdFromObject from "@/utils/createTdFromObject";
 import ReportStatus from "@/constants/ReportStatus";
 import Button from "@/components/shared/Button";
 
-const Table = ({ headers, datas, callback }) => {
+const SupervisorTable = ({ headers, datas, callback }) => {
   return (
     <div className="costume-scroll overflow-scroll xs:w-[100%] w-[95%] h-[90%]">
       <table className="text-sm w-[100%]">
@@ -25,7 +25,22 @@ const Table = ({ headers, datas, callback }) => {
               className={`border-b dark:border-neutral-500 text-xs text-center ${
                 index % 2 === 1 ? "bg-slate-300" : "bg-slate-100"
               }`}>
-              {createTdFromObject(item, index)}
+              {createTdFromObject(
+                item,
+                index,
+                "status",
+                ReportStatus?.Pending,
+                <span className="flex gap-4">
+                  <Button
+                    onClickCallback={() => callback(ReportStatus?.Accepted)}>
+                    تایید
+                  </Button>
+                  <Button
+                    onClickCallback={() => callback(ReportStatus?.Rejected)}>
+                    رد
+                  </Button>
+                </span>
+              )}
             </tr>
           ))}
         </tbody>
@@ -34,4 +49,4 @@ const Table = ({ headers, datas, callback }) => {
   );
 };
 
-export default Table;
+export default SupervisorTable;
