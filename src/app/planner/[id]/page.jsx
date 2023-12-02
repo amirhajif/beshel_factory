@@ -4,6 +4,7 @@ import ReportsDetailedTableHeaders from "@/constants/ReportsDetailedTableHeaders
 import ReportsMocksData from "@/mocks/ReportsMocksData";
 import Table from "@/components/shared/Table";
 import Link from "next/link";
+import Routes from "@/constants/Routes";
 const Report = ({ params }) => {
   const { id } = params || "";
 
@@ -14,7 +15,7 @@ const Report = ({ params }) => {
   return (
     <div className="h-[100vh] flex flex-col p-3 bg-slate-200">
       <Link
-        href="/planner"
+        href={`/${Routes?.Planner}`}
         className="bg-indigo-800 cursor-pointer text-slate-50 w-fit p-2 rounded-lg">
         بازگشت به گزارشات
       </Link>

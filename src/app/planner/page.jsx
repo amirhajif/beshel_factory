@@ -5,15 +5,21 @@ import ReportsTableHeaders from "@/constants/ReportsTableHeaders";
 import ReportMiniTable from "@/components/shared/ReportMiniTable";
 import DashboardWrapper from "@/components/layouts/DashboardWrapper";
 import PlannerNavbarItems from "@/constants/PlannerNavbarItems";
+import Filter from "@/components/shared/Filter";
+import Routes from "@/constants/Routes";
+
 const Planner = async () => {
   return (
     <DashboardWrapper navItems={PlannerNavbarItems}>
       <DashboardContent>
-        <ReportMiniTable
-          headers={ReportsTableHeaders}
-          datas={MiniReportsMocksData}
-          baseRoute={"planner"}
-        />
+        <div className="costume-scroll overflow-scroll xs:w-[100%] w-[95%] h-[90%]">
+          <Filter />
+          <ReportMiniTable
+            headers={ReportsTableHeaders}
+            datas={MiniReportsMocksData}
+            baseRoute={Routes?.Planner}
+          />
+        </div>
       </DashboardContent>
     </DashboardWrapper>
   );
