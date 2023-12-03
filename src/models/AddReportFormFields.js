@@ -1,7 +1,5 @@
 import { z } from "zod";
 export const AddReportFormSchema = z.object({
-  date: z.coerce.string(),
-  time: z.coerce.string(),
   operator: z.coerce.string(),
   machine: z.coerce.string(),
   stage: z.coerce.number(),
