@@ -31,6 +31,7 @@
   font-weight: 400;
 }
 
+/* mobile navigation */
 .Mui-selected {
   color: white;
   font-family: "vazir" !important;
@@ -42,7 +43,9 @@
   font-size: 0.75rem !important;
   line-height: 1rem;
 }
+/* mobile navigation */
 
+/* costume scroll */
 .costume-scroll::-webkit-scrollbar {
   width: 5px;
   height: 5px;
@@ -71,3 +74,11 @@
   background: #555;
   width: 5px;
 }
+
+/* costume scroll */
+
+/* date picker*/
+.rmdp-container {
+  display: block !important;
+}
+/* date picker*/

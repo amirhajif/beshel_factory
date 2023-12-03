@@ -20,7 +20,8 @@
     "react-dom": "^18",
     "react-multi-date-picker": "^4.4.1",
     "sharp": "^0.32.6",
-    "sweetalert2": "^11.7.28"
+    "sweetalert2": "^11.7.28",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "autoprefixer": "^10.0.1",

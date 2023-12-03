@@ -1,3 +1,20 @@
+import { z } from "zod";
+export const AddReportFormSchema = z.object({
+  date: z.coerce.string(),
+  time: z.coerce.string(),
+  operator: z.coerce.string(),
+  machine: z.coerce.string(),
+  stage: z.coerce.number(),
+  partsNo: z.coerce.string(),
+  st: z.coerce.number(),
+  erroredPart: z.coerce.number(),
+  noErroredPart: z.coerce.number(),
+  pauseControl1AndTm: z.coerce.string(),
+  pauseControl2AndTm: z.coerce.string(),
+  pauseControl3AndTm: z.coerce.string(),
+  pauseControl4AndTm: z.coerce.string(),
+});
+
 export const AddReportFormFields = Object.freeze({
   date: { title: "date", placeholder: "تاریخ" },
   operator: { title: "operator", placeholder: "اپراتور" },
