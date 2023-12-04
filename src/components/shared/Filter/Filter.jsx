@@ -82,6 +82,7 @@ const Filter = () => {
                     onChange={setFinishedAt}
                     calendar={persian}
                     locale={persian_fa}
+                    minDate={startedAt}
                     className="red"
                 />
             </div>

@@ -77,6 +77,7 @@ const AddOrderForm = ({
                     calendar={persian}
                     locale={persian_fa}
                     className="red"
+                    minDate={finish}
                 />
             </div>
 
