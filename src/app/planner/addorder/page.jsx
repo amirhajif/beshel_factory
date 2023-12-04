@@ -8,7 +8,6 @@ import PlannerNavbarItems from "@/constants/PlannerNavbarItems";
 import DashboardContent from "@/components/layouts/DashboardContent";
 import AuthProvider from "@/components/layouts/AuthProvider";
 
-import AddOrderFormFields from "@/models/AddOrderFormFields";
 import AddOrderForm from "@/components/templates/Forms/AddOrderForm";
 
 import AddOrderSelects from "@/constants/AddOrderSelects";

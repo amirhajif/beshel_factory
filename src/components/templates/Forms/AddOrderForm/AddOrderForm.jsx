@@ -6,6 +6,7 @@ import DatePicker, { DateObject } from "react-multi-date-picker"
 import persian from "react-date-object/calendars/persian"
 import persian_fa from "react-date-object/locales/persian_fa"
 import Gregorian from 'react-date-object/calendars/gregorian'
+import Gregorian_en from 'react-date-object/locales/gregorian_en'
 import "react-multi-date-picker/styles/colors/red.css"
 
 import Button from "@/components/shared/Button";
@@ -34,8 +35,8 @@ const AddOrderForm = ({
         )?.value
 
         console.log(productName, companyName, count)
-        console.log(start.convert(Gregorian).format())
-        console.log(finish.convert(Gregorian).format())
+        console.log(start.convert(Gregorian, Gregorian_en).format("YYYY-MM-DD"))
+        console.log(finish.convert(Gregorian, Gregorian_en).format("YYYY-MM-DD"))
 
     }
 
@@ -76,6 +77,7 @@ const AddOrderForm = ({
                     calendar={persian}
                     locale={persian_fa}
                     className="red"
+                    minDate={finish}
                 />
             </div>
 
