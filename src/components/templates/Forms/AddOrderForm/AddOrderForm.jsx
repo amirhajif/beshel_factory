@@ -35,8 +35,8 @@ const AddOrderForm = ({
         )?.value
 
         console.log(productName, companyName, count)
-        console.log(start.convert(Gregorian).format())
-        console.log(finish.convert(Gregorian).format())
+        console.log(start.convert(Gregorian, Gregorian_en).format("YYYY-MM-DD"))
+        console.log(finish.convert(Gregorian, Gregorian_en).format("YYYY-MM-DD"))
 
     }
 
