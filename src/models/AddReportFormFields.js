@@ -14,6 +14,7 @@ export const AddReportFormSchema = z.object({
 });
 
 export const AddReportFormFields = Object.freeze({
+  orderId: { title: "orderId", placeholder: "شناسه سفارش", listId: "ordersId" },
   date: { title: "date", placeholder: "تاریخ" },
   operator: { title: "operator", placeholder: "اپراتور" },
   machine: { title: "machine", placeholder: "ماشین" },

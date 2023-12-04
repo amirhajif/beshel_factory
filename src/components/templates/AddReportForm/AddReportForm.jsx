@@ -76,6 +76,33 @@ const AddReportForm = () => {
         />
       </div>
 
+      <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 ">
+        <Label
+          className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+          forValue="order-id"
+          text="شناسه سفارش"
+        />
+        <input
+          className="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+          list={AddReportFormFields?.orderId?.listId}
+          name={AddReportFormFields?.orderId?.title}
+          id={AddReportFormFields?.orderId?.title}
+          placeholder={AddReportFormFields?.orderId?.placeholder}
+        />
+        <datalist id={AddReportFormFields?.orderId?.listId}>
+          <option value="1" />
+          <option value="2" />
+          <option value="12" />
+          <option value="3" />
+          <option value="50" />
+          <option value="1" />
+          <option value="2" />
+          <option value="12" />
+          <option value="3" />
+          <option value="50" />
+        </datalist>
+      </div>
+
       {AddReportFormSchema?.keyof()?._def?.values.map((_key) => (
         <ReportFormTextField key={_key} schema={AddReportFormFields[_key]} />
       ))}
