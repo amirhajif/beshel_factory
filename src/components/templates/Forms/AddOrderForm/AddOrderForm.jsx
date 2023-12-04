@@ -6,6 +6,7 @@ import DatePicker, { DateObject } from "react-multi-date-picker"
 import persian from "react-date-object/calendars/persian"
 import persian_fa from "react-date-object/locales/persian_fa"
 import Gregorian from 'react-date-object/calendars/gregorian'
+import Gregorian_en from 'react-date-object/locales/gregorian_en'
 import "react-multi-date-picker/styles/colors/red.css"
 
 import Button from "@/components/shared/Button";
