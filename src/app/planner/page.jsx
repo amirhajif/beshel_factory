@@ -8,6 +8,13 @@ import PlannerNavbarItems from "@/constants/PlannerNavbarItems";
 import Filter from "@/components/shared/Filter";
 import Routes from "@/constants/Routes";
 
+export const generateMetadata = async () => {
+  return {
+    title: "پنل برنامه ریز",
+    description: "پنل برنامه ریز",
+  };
+};
+
 const Planner = async () => {
   return (
     <DashboardWrapper navItems={PlannerNavbarItems}>
