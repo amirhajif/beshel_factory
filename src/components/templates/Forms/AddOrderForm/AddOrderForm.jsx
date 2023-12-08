@@ -1,6 +1,6 @@
 "use client"
 import Select from '@/components/shared/Select'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import DatePicker, { DateObject } from "react-multi-date-picker"
 import persian from "react-date-object/calendars/persian"
@@ -13,6 +13,7 @@ import Button from "@/components/shared/Button";
 import Label from "@/components/shared/Label";
 import TextField from "@/components/shared/TextField";
 import AddOrderFormFields from '@/models/AddOrderFormFields'
+import { getParts } from '@/apis/sampleApi'
 
 const AddOrderForm = ({
     formClassName,
@@ -20,6 +21,7 @@ const AddOrderForm = ({
 }) => {
     let [start, setStart] = useState(new DateObject())
     let [finish, setFinish] = useState(new DateObject())
+    const [parts, setParts] = useState([])
     const handleSubmit = async (e) => {
         e.preventDefault()
         let formsElements = e.target.elements;
@@ -39,21 +41,30 @@ const AddOrderForm = ({
         console.log(finish.convert(Gregorian, Gregorian_en).format("YYYY-MM-DD"))
 
     }
+    useEffect(() => {
+        const cachedParts = getParts()
+        cachedParts.then((res) => {
+            setParts(res.data.results)
+        })
+    }, [])
 
     return (
-        <form className={formClassName} onSubmit={handleSubmit}>
-            {selects.map(select => (
-                <Select
-                    key={select.text}
-                    parentClassName={select.parentClassName}
-                    labelClassName={select.labelClassName}
-                    forValue={select.forValue}
-                    text={select.text}
-                    selectClassName={select.selectClassName}
-                    selectId={select.selectId}
-                    options={select.options}
-                />
-            ))}
+
+        <form form className={formClassName} onSubmit={handleSubmit} >
+            {
+                selects.map(select => (
+                    <Select
+                        key={select.text}
+                        parentClassName={select.parentClassName}
+                        labelClassName={select.labelClassName}
+                        forValue={select.forValue}
+                        text={select.text}
+                        selectClassName={select.selectClassName}
+                        selectId={select.selectId}
+                        options={parts}
+                    />
+                ))
+            }
             {/* start date */}
             <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                 <Label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" forValue="startDate" text="تاریخ شروع" />
@@ -89,7 +100,7 @@ const AddOrderForm = ({
             <div className="w-full md:w-2/3 px-3 mb-6 md:mb-0">
                 <Button className="bg-transparent hover:bg-green-500 w-full text-green-700 font-semibold hover:text-white mt-6  py-3 px-4 border border-green-500 hover:border-transparent rounded">ثبت سفارش</Button>
             </div>
-        </form>
+        </form >
     )
 }
 

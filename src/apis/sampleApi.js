@@ -14,16 +14,18 @@ const getData = async () => {
 export const AddPart = async (title) => {
     try {
         const response = await axiosInterceptorInstance.post('/parts/', {
-            // data: {
-            //     'title': title
-            // }
             'title': title
         })
         return response.data
-
     } catch (error) {
-        // console.log(error)
-        // console.log('errorr')
+        return undefined
+    }
+}
+
+export const getParts = async () => {
+    try {
+        return await axiosInterceptorInstance.get('/parts/')
+    } catch (error) {
         return undefined
     }
 }
