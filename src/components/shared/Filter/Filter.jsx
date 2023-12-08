@@ -6,7 +6,7 @@ import StatusOptions from '@/constants/StatusOptions';
 import { MachineOptions } from '@/constants/MachineOptions';
 import FilterFields from '@/models/FilterFields';
 
-import DatePicker, { DateObject } from "react-multi-date-picker"
+import DatePicker from "react-multi-date-picker"
 import persian from "react-date-object/calendars/persian"
 import persian_fa from "react-date-object/locales/persian_fa"
 import Gregorian from 'react-date-object/calendars/gregorian'
