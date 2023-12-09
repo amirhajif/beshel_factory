@@ -1,7 +1,5 @@
 import PlannerNavbarItems from "@/constants/PlannerNavbarItems";
 import DashboardContent from "@/components/layouts/DashboardContent";
-import InputSection from "@/components/shared/InputSection";
-import Button from "@/components/shared/Button";
 import DashboardWrapper from "@/components/layouts/DashboardWrapper";
 import AddClientForm from "@/components/templates/Forms/AddClientForm";
 

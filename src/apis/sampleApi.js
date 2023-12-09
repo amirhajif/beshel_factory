@@ -35,7 +35,7 @@ export const getAllParts = async () => {
 // api for add Clients
 export const addClient = async (title) => {
     try {
-        const response = await axiosInterceptorInstance.post('/parts/', {
+        const response = await axiosInterceptorInstance.post('/clients/', {
             'title': title
         })
         return response.data
@@ -43,6 +43,7 @@ export const addClient = async (title) => {
         return undefined
     }
 }
+// api for get all Clients
 export const getAllClients = async () => {
     try {
         return await axiosInterceptorInstance.get('/clients?all_data')

@@ -1,6 +1,9 @@
+"use client"
+import { addClient } from '@/apis/sampleApi'
 import Button from '@/components/shared/Button'
 import InputSection from '@/components/shared/InputSection'
 import React from 'react'
+import Swal from 'sweetalert2'
 
 const AddClientForm = ({
     formClassName,
@@ -13,8 +16,28 @@ const AddClientForm = ({
     id,
     placeholder
 }) => {
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        let formsElements = e.target.elements;
+
+        let title = formsElements.namedItem('title')?.value
+        const response = await addClient(title)
+        response != undefined ?
+            Swal.fire({
+                title: 'شرکت افزوده شد',
+                text: `شرکت شما با شناسه ${response.data.id} با موفقیت افزوده شد`,
+                icon: 'success'
+            })
+            :
+            Swal.fire({
+                title: 'شرکت افزوده نشد',
+                text: `در افزودن شرکت ${title} مشکلی پیش آمده`,
+                icon: 'error'
+            })
+        formsElements.namedItem('title').value = ''
+    }
     return (
-        <form className={formClassName} >
+        <form className={formClassName} onSubmit={handleSubmit}>
             < InputSection
                 parentClassName={parentClassName}
                 labelClassName={labelClassName}
