@@ -1,6 +1,5 @@
 "use client"
-import { AddPart } from '@/apis/sampleApi'
-import { useRouter } from 'next/navigation';
+import { addPart } from '@/apis/sampleApi'
 import Button from '@/components/shared/Button'
 import InputSection from '@/components/shared/InputSection'
 import React from 'react'
@@ -16,10 +15,9 @@ const AddPartForm = ({
     text,
     name,
     id,
-    placeholder,
+    placeholder
 }) => {
 
-    const router = useRouter();
 
 
     const handleSubmit = async (e) => {
@@ -27,13 +25,11 @@ const AddPartForm = ({
         let formsElements = e.target.elements;
 
         let title = formsElements.namedItem('title')?.value
-        // const res = await AddPart(title)
-        const response = await AddPart(title)
-        // console.log(response)
+        const response = await addPart(title)
         response != undefined ?
             Swal.fire({
                 title: 'قطعه افزوده شد',
-                text: `قطعه شما با شناسه ${response.id} با موفقیت افزوده شد`,
+                text: `قطعه شما با شناسه ${response.data.id} با موفقیت افزوده شد`,
                 icon: 'success'
             })
             :

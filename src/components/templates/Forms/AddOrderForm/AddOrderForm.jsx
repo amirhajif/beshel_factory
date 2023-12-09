@@ -13,8 +13,7 @@ import Button from "@/components/shared/Button";
 import Label from "@/components/shared/Label";
 import TextField from "@/components/shared/TextField";
 import AddOrderFormFields from '@/models/AddOrderFormFields'
-import { getAllParts, getAllCompanies } from '@/apis/sampleApi'
-import Companies from '@/mocks/Companies'
+import { getAllParts, getAllClients } from '@/apis/sampleApi'
 
 const AddOrderForm = ({
     formClassName
@@ -48,7 +47,7 @@ const AddOrderForm = ({
             setParts(res.data.data)
         })
 
-        const cachedCompanies = getAllCompanies()
+        const cachedCompanies = getAllClients()
         cachedCompanies.then((res) => {
             setCompanies(res.data.data)
         })
