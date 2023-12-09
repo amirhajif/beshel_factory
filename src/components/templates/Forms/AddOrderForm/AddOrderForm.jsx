@@ -13,15 +13,16 @@ import Button from "@/components/shared/Button";
 import Label from "@/components/shared/Label";
 import TextField from "@/components/shared/TextField";
 import AddOrderFormFields from '@/models/AddOrderFormFields'
-import { getParts } from '@/apis/sampleApi'
+import { getAllParts, getAllCompanies } from '@/apis/sampleApi'
+import Companies from '@/mocks/Companies'
 
 const AddOrderForm = ({
-    formClassName,
-    selects
+    formClassName
 }) => {
     let [start, setStart] = useState(new DateObject())
     let [finish, setFinish] = useState(new DateObject())
     const [parts, setParts] = useState([])
+    const [companies, setCompanies] = useState([])
     const handleSubmit = async (e) => {
         e.preventDefault()
         let formsElements = e.target.elements;
@@ -42,29 +43,42 @@ const AddOrderForm = ({
 
     }
     useEffect(() => {
-        const cachedParts = getParts()
+        const cachedParts = getAllParts()
         cachedParts.then((res) => {
-            setParts(res.data.results)
+            setParts(res.data.data)
         })
+
+        const cachedCompanies = getAllCompanies()
+        cachedCompanies.then((res) => {
+            setCompanies(res.data.data)
+        })
+
+
     }, [])
 
     return (
 
         <form form className={formClassName} onSubmit={handleSubmit} >
-            {
-                selects.map(select => (
-                    <Select
-                        key={select.text}
-                        parentClassName={select.parentClassName}
-                        labelClassName={select.labelClassName}
-                        forValue={select.forValue}
-                        text={select.text}
-                        selectClassName={select.selectClassName}
-                        selectId={select.selectId}
-                        options={parts}
-                    />
-                ))
-            }
+            <Select
+                parentClassName="w-full md:w-1/2 px-3 mb-6 md:mb-0"
+                labelClassName="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                forValue="partName"
+                text=" نام قطعه"
+                selectClassName="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                selectId="partName"
+                options={parts}
+            />
+
+            <Select
+                parentClassName="w-full md:w-1/2 px-3 mb-6 md:mb-0"
+                labelClassName="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                forValue="companyName"
+                text="نام شرکت"
+                selectClassName="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                selectId="companyName"
+                options={companies}
+            />
+
             {/* start date */}
             <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                 <Label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" forValue="startDate" text="تاریخ شروع" />

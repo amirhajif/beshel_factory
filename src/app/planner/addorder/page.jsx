@@ -3,7 +3,6 @@ import DashboardContent from "@/components/layouts/DashboardContent";
 
 import AddOrderForm from "@/components/templates/Forms/AddOrderForm";
 
-import AddOrderSelects from "@/constants/AddOrderSelects";
 import DashboardWrapper from "@/components/layouts/DashboardWrapper";
 
 export const generateMetadata = async () => {
@@ -19,7 +18,6 @@ const Addorder = async () => {
       <DashboardContent>
         <AddOrderForm
           formClassName="w-full max-w-lg flex gap-y-3 flex-wrap -mx-3 mb-6"
-          selects={AddOrderSelects}
         />
       </DashboardContent>
     </DashboardWrapper>

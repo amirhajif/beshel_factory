@@ -22,11 +22,18 @@ export const AddPart = async (title) => {
     }
 }
 
-export const getParts = async () => {
+export const getAllParts = async () => {
     try {
-        return await axiosInterceptorInstance.get('/parts/')
+        return await axiosInterceptorInstance.get('/parts?all_data')
     } catch (error) {
         return undefined
     }
 }
 
+export const getAllCompanies = async () => {
+    try {
+        return await axiosInterceptorInstance.get('/clients?all_data')
+    } catch (error) {
+        return undefined
+    }
+}

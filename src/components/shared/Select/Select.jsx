@@ -10,7 +10,6 @@ const Select = ({
     selectId,
     options
 }) => {
-    console.log(options)
     return (
         <div div className={parentClassName} >
             <Label className={labelClassName} forValue={forValue} text={text} />
