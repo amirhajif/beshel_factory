@@ -16,7 +16,7 @@ const Select = ({
             <div className="relative">
                 <select className={selectClassName} id={selectId}>
                     {options.map((option) => (
-                        <option key={option.id} value={option.title}>{option.title}</option>
+                        <option key={option.id} value={option.id}>{option.title}</option>
                     ))}
                 </select>
                 <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">

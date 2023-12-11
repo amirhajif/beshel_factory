@@ -11,7 +11,6 @@ import persian from "react-date-object/calendars/persian"
 import persian_fa from "react-date-object/locales/persian_fa"
 import Gregorian from 'react-date-object/calendars/gregorian'
 import Gregorian_en from 'react-date-object/locales/gregorian_en'
-
 import "react-multi-date-picker/styles/colors/red.css"
 
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
@@ -32,10 +31,6 @@ const Filter = () => {
         let status = formsElements.namedItem(
             FilterFields?.status?.title
         )?.value;
-
-        let date = formsElements.namedItem(
-            FilterFields?.date?.title
-        )?.value
 
         let machine = formsElements.namedItem(
             FilterFields?.machine?.title

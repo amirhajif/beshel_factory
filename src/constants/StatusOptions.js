@@ -1,19 +1,19 @@
 export const StatusOptions = [
     {
-        'value': '',
-        'text': 'همه'
+        'id': '',
+        'title': 'همه'
     },
     {
-        'value': 'accept',
-        'text': 'قبول شده'
+        'id': 'accept',
+        'title': 'قبول شده'
     },
     {
-        'value': 'reject',
-        'text': 'رد شده'
+        'id': 'reject',
+        'title': 'رد شده'
     },
     {
-        'value': 'pending',
-        'text': 'در حال بررسی'
+        'id': 'pending',
+        'title': 'در حال بررسی'
     }
 
 ]
