@@ -3,8 +3,7 @@ import { addClient } from '@/apis/sampleApi'
 import Button from '@/components/shared/Button'
 import InputSection from '@/components/shared/InputSection'
 import React from 'react'
-import Swal from 'sweetalert2'
-
+import sendNotif from '@/utils/sendNotif'
 const AddClientForm = ({
     formClassName,
     parentClassName,
@@ -23,17 +22,10 @@ const AddClientForm = ({
         let title = formsElements.namedItem('title')?.value
         const response = await addClient(title)
         response != undefined ?
-            Swal.fire({
-                title: 'شرکت افزوده شد',
-                text: `شرکت شما با شناسه ${response.data.id} با موفقیت افزوده شد`,
-                icon: 'success'
-            })
+            sendNotif('سفارش دهنده افزوده شد', 'success', true, 'center', 2000)
             :
-            Swal.fire({
-                title: 'شرکت افزوده نشد',
-                text: `در افزودن شرکت ${title} مشکلی پیش آمده`,
-                icon: 'error'
-            })
+            sendNotif('خطایی رخ داده است', 'error', true, 'center', 2000)
+
         formsElements.namedItem('title').value = ''
     }
     return (

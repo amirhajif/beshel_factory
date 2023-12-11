@@ -52,7 +52,6 @@ const AddOrderForm = ({
             setCompanies(res.data.data)
         })
 
-
     }, [])
 
     return (
