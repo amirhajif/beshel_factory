@@ -3,6 +3,7 @@ import dynamic from "next/dynamic";
 import OperatorNavbarItems from "@/constants/OperatorNavbarItems";
 import AddReportForm from "@/components/templates/AddReportForm";
 import getMachines from "@/apis/getMachines";
+import getOrders from "@/apis/getOrders";
 
 const Operator = async () => {
   const DashboardWrapper = dynamic(
@@ -11,12 +12,17 @@ const Operator = async () => {
       ssr: false,
     }
   );
-  const data = await getMachines();
-  const result = data?.data?.results;
+
+  const machineRequest = await getMachines();
+  const machines = machineRequest?.data?.results;
+
+  const ordersRequest = await getOrders();
+  const orders = ordersRequest?.data?.results;
+
   return (
     <DashboardWrapper navItems={OperatorNavbarItems}>
       <DashboardContent>
-        <AddReportForm info={result} />
+        <AddReportForm machines={machines} orders={orders} />
       </DashboardContent>
     </DashboardWrapper>
   );

@@ -17,14 +17,17 @@ import ReportFormTextField from "./ReportFormTextField";
 import AddReportFormFields from "@/models/AddReportFormFields";
 import createObjectFromForm from "@/utils/createObjectFromForm";
 import { AddReportFormSchema } from "@/models/AddReportFormFields";
+import { addReport } from "@/apis/addReport";
 
-const AddReportForm = ({ info }) => {
-  console.log(info);
+import sendNotif from "@/utils/sendNotif";
+
+const AddReportForm = ({ machines, orders }) => {
   let [inputDate, setInputDate] = useState(new DateObject());
   let [inputTime, setInputTime] = useState(new DateObject());
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    //e.target.reset();
 
     let { data } = createObjectFromForm(e.target.elements, AddReportFormSchema);
 
@@ -42,7 +45,12 @@ const AddReportForm = ({ info }) => {
       status: "p",
     };
 
-    console.log(data);
+    try {
+      await addReport(data);
+      sendNotif("با موفقیت ایجاد شد", "success");
+    } catch (err) {
+      sendNotif("خطایی رخ داد", "error");
+    }
   };
   return (
     <form
@@ -96,16 +104,9 @@ const AddReportForm = ({ info }) => {
           placeholder={AddReportFormFields?.order?.placeholder}
         />
         <datalist id={AddReportFormFields?.order?.listId}>
-          <option value="1" />
-          <option value="2" />
-          <option value="12" />
-          <option value="3" />
-          <option value="50" />
-          <option value="1" />
-          <option value="2" />
-          <option value="12" />
-          <option value="3" />
-          <option value="50" />
+          {orders.map(({ id }) => (
+            <option key={`order${id}`} value={id}></option>
+          ))}
         </datalist>
       </div>
       <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 ">
@@ -122,16 +123,11 @@ const AddReportForm = ({ info }) => {
           placeholder={AddReportFormFields?.machine?.placeholder}
         />
         <datalist id={AddReportFormFields?.machine?.listId}>
-          <option value="1" />
-          <option value="2" />
-          <option value="12" />
-          <option value="3" />
-          <option value="50" />
-          <option value="1" />
-          <option value="2" />
-          <option value="12" />
-          <option value="3" />
-          <option value="50" />
+          {machines.map(({ id, title }) => (
+            <option key={`machine${id}`} value={id}>
+              {title}
+            </option>
+          ))}
         </datalist>
       </div>
 

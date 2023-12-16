@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const axiosInterceptorInstance = axios.create({
-    baseURL: 'https://inv.iran.liara.run/api/', // Replace with your API base URL
+    baseURL: 'https://kbapis.iran.liara.run/api/', // Replace with your API base URL
 });
 
 
