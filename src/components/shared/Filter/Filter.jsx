@@ -11,11 +11,12 @@ import persian from "react-date-object/calendars/persian"
 import persian_fa from "react-date-object/locales/persian_fa"
 import Gregorian from 'react-date-object/calendars/gregorian'
 import Gregorian_en from 'react-date-object/locales/gregorian_en'
-
 import "react-multi-date-picker/styles/colors/red.css"
 
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import Label from '../Label';
+
+
 
 const Filter = () => {
     const searchParams = useSearchParams()
@@ -26,16 +27,19 @@ const Filter = () => {
     let [startedAt, setStartedAt] = useState('')
     let [finishedAt, setFinishedAt] = useState('')
 
+    const resetForm = () => {
+        setStartedAt('')
+        setFinishedAt('')
+
+        replace(`${pathname}`);
+    }
+
     const onSubmit = async (e) => {
         e.preventDefault();
         let formsElements = e.target.elements;
         let status = formsElements.namedItem(
             FilterFields?.status?.title
         )?.value;
-
-        let date = formsElements.namedItem(
-            FilterFields?.date?.title
-        )?.value
 
         let machine = formsElements.namedItem(
             FilterFields?.machine?.title
@@ -95,8 +99,9 @@ const Filter = () => {
                 selectId="machine"
                 options={MachineOptions}
             />
-            <div className="w-full md:w-1/5 px-3 mb-6 md:mb-0">
-                <Button className="bg-transparent hover:bg-green-500 w-full text-green-700 font-semibold hover:text-white mt-6  py-3 px-4 border border-green-500 hover:border-transparent rounded">فیلتر</Button>
+            <div className="w-full md:w-1/5 px-3 mb-6 md:mb-0 flex gap-2">
+                <Button className="bg-transparent hover:bg-green-500 w-1/2 text-green-700 font-light text-sm hover:text-white mt-6  py-1 px-4 border border-green-500 hover:border-transparent rounded">اعمال فیلتر</Button>
+                <Button className="bg-transparent hover:bg-red-500 w-1/2 text-red-700 font-light text-sm hover:text-white mt-6  py-1 px-4 border border-red-500 hover:border-transparent rounded" type='reset' onClickCallback={resetForm}>حذف فیلتر</Button>
             </div>
         </form>
 

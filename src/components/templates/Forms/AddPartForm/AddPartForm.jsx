@@ -2,8 +2,8 @@
 import { addPart } from '@/apis/sampleApi'
 import Button from '@/components/shared/Button'
 import InputSection from '@/components/shared/InputSection'
+import sendNotif from '@/utils/sendNotif'
 import React from 'react'
-import Swal from 'sweetalert2'
 
 
 const AddPartForm = ({
@@ -27,17 +27,10 @@ const AddPartForm = ({
         let title = formsElements.namedItem('title')?.value
         const response = await addPart(title)
         response != undefined ?
-            Swal.fire({
-                title: 'قطعه افزوده شد',
-                text: `قطعه شما با شناسه ${response.data.id} با موفقیت افزوده شد`,
-                icon: 'success'
-            })
+            sendNotif('قطعه افزوده شد', 'success', true, 'center', 2000)
             :
-            Swal.fire({
-                title: 'قطعه افزوده نشد',
-                text: `در افزودن قطعه ${title} مشکلی پیش آمده`,
-                icon: 'error'
-            })
+            sendNotif('قطعه افزوده نشد', 'error', true, 'center', 2000)
+
         formsElements.namedItem('title').value = ''
     }
     return (

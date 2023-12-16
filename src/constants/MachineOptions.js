@@ -1,18 +1,18 @@
 export const MachineOptions = [
     {
-        'value': '',
-        'text': 'همه'
+        'id': '',
+        'title': 'همه'
     },
     {
-        'value': 'me-1',
-        'text': 'ME-1'
+        'id': 'me-1',
+        'title': 'ME-1'
     },
     {
-        'value': 'me-2',
-        'text': 'ME-2'
+        'id': 'me-2',
+        'title': 'ME-2'
     },
     {
-        'value': 'me-3',
-        'text': 'ME-3'
+        'id': 'me-3',
+        'title': 'ME-3'
     }
 ]
