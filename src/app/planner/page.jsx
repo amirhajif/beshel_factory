@@ -1,9 +1,8 @@
 import DashboardContent from "@/components/layouts/DashboardContent";
-
+import dynamic from "next/dynamic";
 import MiniReportsMocksData from "@/mocks/MiniReportsMocksData";
 import ReportsTableHeaders from "@/constants/ReportsTableHeaders";
 import ReportMiniTable from "@/components/shared/ReportMiniTable";
-import DashboardWrapper from "@/components/layouts/DashboardWrapper";
 import PlannerNavbarItems from "@/constants/PlannerNavbarItems";
 import Filter from "@/components/shared/Filter";
 import Routes from "@/constants/Routes";
@@ -17,6 +16,13 @@ export const generateMetadata = async () => {
 };
 
 const Planner = async () => {
+  const DashboardWrapper = dynamic(
+    () => import("@/components/layouts/DashboardWrapper"),
+    {
+      ssr: false,
+    }
+  );
+
   const machineRequest = await getMachines();
   const machines = machineRequest?.data?.results;
 
@@ -25,11 +31,7 @@ const Planner = async () => {
       <DashboardContent>
         <div className="costume-scroll overflow-scroll xs:w-[100%] w-[95%] h-[90%]">
           <Filter options={{ machines: machines }} />
-          <ReportMiniTable
-            headers={ReportsTableHeaders}
-            datas={MiniReportsMocksData}
-            baseRoute={Routes?.Planner}
-          />
+          <ReportMiniTable baseRoute={Routes?.Planner} />
         </div>
       </DashboardContent>
     </DashboardWrapper>
