@@ -29,14 +29,18 @@ const SupervisorTable = ({ headers, datas, callback }) => {
                 item,
                 index,
                 "status",
-                ReportStatus?.Pending,
+                ReportStatus?.Pending?.title,
                 <span className="flex gap-4">
                   <Button
-                    onClickCallback={() => callback(ReportStatus?.Accepted)}>
+                    onClickCallback={() =>
+                      callback(ReportStatus?.Accepted?.key)
+                    }>
                     تایید
                   </Button>
                   <Button
-                    onClickCallback={() => callback(ReportStatus?.Rejected)}>
+                    onClickCallback={() =>
+                      callback(ReportStatus?.Rejected?.key)
+                    }>
                     رد
                   </Button>
                 </span>

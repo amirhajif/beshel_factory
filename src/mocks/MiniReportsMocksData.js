@@ -5,7 +5,7 @@ export const MiniReportsMocksData = [
     date: "1402/11/11",
     operator: "رضا رضایی",
     machine: "ME-1",
-    status: ReportStatus?.Accepted,
+    status: ReportStatus?.Accepted?.title,
     dummy: "",
   },
   {
@@ -13,7 +13,7 @@ export const MiniReportsMocksData = [
     date: "1402/11/12",
     operator: "علی علیپور",
     machine: "ME-2",
-    status: ReportStatus?.Rejected,
+    status: ReportStatus?.Rejected?.title,
     dummy: "",
   },
   {
@@ -21,7 +21,7 @@ export const MiniReportsMocksData = [
     date: "1402/11/13",
     operator: "حسن حسنپور",
     machine: "ME-3",
-    status: ReportStatus?.Pending,
+    status: ReportStatus?.Pending?.title,
     dummy: "",
   },
   {
@@ -29,7 +29,7 @@ export const MiniReportsMocksData = [
     date: "1402/11/11",
     operator: "رضا رضایی",
     machine: "ME-4",
-    status: ReportStatus?.Accepted,
+    status: ReportStatus?.Accepted?.title,
     dummy: "",
   },
   {
@@ -37,7 +37,7 @@ export const MiniReportsMocksData = [
     date: "1402/11/12",
     operator: "علی علیپور",
     machine: "ME-5",
-    status: ReportStatus?.Rejected,
+    status: ReportStatus?.Rejected?.title,
     dummy: "",
   },
   {
@@ -45,7 +45,7 @@ export const MiniReportsMocksData = [
     date: "1402/11/13",
     operator: "حسن حسنپور",
     machine: "ME-6",
-    status: ReportStatus?.Pending,
+    status: ReportStatus?.Pending?.title,
     dummy: "",
   },
 ];

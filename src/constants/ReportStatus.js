@@ -1,7 +1,7 @@
 export const ReportStatus = Object.freeze({
-  Accepted: "تایید شده",
-  Rejected: "رد شده",
-  Pending: "درحال بررسی",
+  Accepted: { title: "تایید شده", key: "a" },
+  Rejected: { title: "رد شده", key: "r" },
+  Pending: { title: "درحال بررسی", key: "p" },
 });
 
 export default ReportStatus;

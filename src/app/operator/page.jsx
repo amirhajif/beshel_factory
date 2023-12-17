@@ -4,6 +4,7 @@ import OperatorNavbarItems from "@/constants/OperatorNavbarItems";
 import AddReportForm from "@/components/templates/AddReportForm";
 import getMachines from "@/apis/getMachines";
 import getOrders from "@/apis/getOrders";
+import sendNotif from "@/utils/sendNotif";
 
 const Operator = async () => {
   const DashboardWrapper = dynamic(

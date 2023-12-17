@@ -20,14 +20,22 @@ import { AddReportFormSchema } from "@/models/AddReportFormFields";
 import { addReport } from "@/apis/addReport";
 
 import sendNotif from "@/utils/sendNotif";
+import ReportStatus from "@/constants/ReportStatus";
 
 const AddReportForm = ({ machines, orders }) => {
+  try {
+    if (machines && orders) sendNotif("باموفقیت بارگذاری شد", "success");
+    else throw new Error("Error");
+  } catch (err) {
+    sendNotif("خطایی رخ داده", "error");
+  }
+
   let [inputDate, setInputDate] = useState(new DateObject());
   let [inputTime, setInputTime] = useState(new DateObject());
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    //e.target.reset();
+    e.target.reset();
 
     let { data } = createObjectFromForm(e.target.elements, AddReportFormSchema);
 
@@ -42,7 +50,7 @@ const AddReportForm = ({ machines, orders }) => {
       machine: Number(
         e.target.elements.namedItem(AddReportFormFields?.machine?.title).value
       ),
-      status: "p",
+      status: ReportStatus?.Pending?.key,
     };
 
     try {

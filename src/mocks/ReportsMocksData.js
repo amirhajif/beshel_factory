@@ -16,7 +16,7 @@ export const ReportsMocksData = [
     pauseControl2AndTm: "s2 3",
     pauseControl3AndTm: "s3 2",
     pauseControl4AndTm: "s4 1",
-    status: ReportStatus?.Pending,
+    status: ReportStatus?.Pending?.title,
   },
   {
     id: "123456780",
@@ -34,7 +34,7 @@ export const ReportsMocksData = [
     pauseControl2AndTm: "s3 3",
     pauseControl3AndTm: "s4 2",
     pauseControl4AndTm: "s1 1",
-    status: ReportStatus?.Accepted,
+    status: ReportStatus?.Accepted?.title,
   },
   {
     id: "123456781",
@@ -52,7 +52,7 @@ export const ReportsMocksData = [
     pauseControl2AndTm: "s2 4",
     pauseControl3AndTm: "s1 1",
     pauseControl4AndTm: "s3 3",
-    status: ReportStatus?.Rejected,
+    status: ReportStatus?.Rejected?.title,
   },
   {
     id: "123456782",
@@ -70,7 +70,7 @@ export const ReportsMocksData = [
     pauseControl2AndTm: "s2 3",
     pauseControl3AndTm: "s3 2",
     pauseControl4AndTm: "s4 1",
-    status: ReportStatus?.Pending,
+    status: ReportStatus?.Pending?.title,
   },
   {
     id: "123456783",
@@ -88,7 +88,7 @@ export const ReportsMocksData = [
     pauseControl2AndTm: "s3 3",
     pauseControl3AndTm: "s4 2",
     pauseControl4AndTm: "s1 1",
-    status: ReportStatus?.Accepted,
+    status: ReportStatus?.Accepted?.title,
   },
   {
     id: "123456784",
@@ -106,7 +106,7 @@ export const ReportsMocksData = [
     pauseControl2AndTm: "s2 4",
     pauseControl3AndTm: "s1 1",
     pauseControl4AndTm: "s3 3",
-    status: ReportStatus?.Rejected,
+    status: ReportStatus?.Rejected?.title,
   },
 ];
 
