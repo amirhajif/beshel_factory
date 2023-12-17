@@ -60,7 +60,7 @@ export const addOrder = async (data) => {
             'count': data.count,
             'started_at': data.started_at,
             'ended_at': data.ended_at,
-            "parts": data.parts,
+            "part": data.part,
             "client": data.client
         })
         return response.data

@@ -24,7 +24,9 @@ const AddOrderForm = ({
     const [parts, setParts] = useState([])
     const [companies, setCompanies] = useState([])
 
-    const resetDate = () => {
+    const resetForm = () => {
+        const form = document.getElementById('form')
+        form.reset()
         setStarted_at('')
         setEnded_at('')
     }
@@ -46,7 +48,7 @@ const AddOrderForm = ({
             'count': count,
             'started_at': started_at.convert(Gregorian, Gregorian_en).format("YYYY-MM-DD"),
             'ended_at': ended_at.convert(Gregorian, Gregorian_en).format("YYYY-MM-DD"),
-            "parts": part,
+            "part": part,
             "client": client
         })
 
@@ -55,7 +57,7 @@ const AddOrderForm = ({
             :
             sendNotif('در ثبت سفارش شما مشکلی پیش آمده', 'error', true, 'center', 2000)
 
-        resetDate()
+        resetForm()
     }
 
     useEffect(() => {
@@ -74,7 +76,7 @@ const AddOrderForm = ({
     }, [])
 
     return (
-        <form form className={formClassName} onSubmit={handleSubmit} >
+        <form className={formClassName} onSubmit={handleSubmit} id='form' >
             {/* part */}
             <Select
                 parentClassName="w-full md:w-1/2 px-3 mb-6 md:mb-0"
@@ -129,7 +131,7 @@ const AddOrderForm = ({
                 <TextField name="count" id="count" placeholder="۱۵" className="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" />
             </div>
             <div className="w-full md:w-2/3 px-3 mb-6 md:mb-0">
-                <Button className="bg-transparent hover:bg-green-500 w-full text-green-700 font-semibold hover:text-white mt-6  py-3 px-4 border border-green-500 hover:border-transparent rounded" type='reset'>ثبت سفارش</Button>
+                <Button className="bg-transparent hover:bg-green-500 w-full text-green-700 font-semibold hover:text-white mt-6  py-3 px-4 border border-green-500 hover:border-transparent rounded" >ثبت سفارش</Button>
             </div>
         </form >
     )
