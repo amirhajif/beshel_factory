@@ -11,8 +11,13 @@ import ReportStatus from "@/constants/ReportStatus";
 import { DateObject } from "react-multi-date-picker";
 import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
+import { useRouter } from "next/navigation";
+import updateReport from "@/apis/updateReport";
+import sendNotif from "@/utils/sendNotif";
 
 const Report = ({ params }) => {
+  const router = useRouter();
+
   const [data, setData] = useState(null);
 
   const { id } = params || "";
@@ -51,8 +56,14 @@ const Report = ({ params }) => {
     fetchData(id);
   }, []);
 
-  const handleAcceptReject = (status) => {
-    console.log(`report ${id} new status will be ${status}`);
+  const handleAcceptReject = async (status) => {
+    try {
+      await updateReport(id, { ...data, status: status });
+      sendNotif("با موفقیت صورت گرفت", "success");
+    } catch (err) {
+      sendNotif("خطایی رخ داد", "error");
+      router.refresh();
+    }
   };
 
   return (
