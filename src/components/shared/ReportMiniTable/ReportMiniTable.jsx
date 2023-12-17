@@ -20,10 +20,6 @@ const ReportMiniTable = ({ baseRoute }) => {
     };
 
     fetchData();
-  }, []);
-
-  useEffect(() => {
-    console.log(searchParams.toString());
   }, [searchParams]);
 
   return (
@@ -41,8 +37,9 @@ const ReportMiniTable = ({ baseRoute }) => {
             ))}
           </tr>
         </thead>
+
         {/* <tbody>
-          {data &&
+          {data && data.length > 0 ? (
             data.map((item, index) => (
               <tr
                 key={`${item.id}_index`}
@@ -59,7 +56,10 @@ const ReportMiniTable = ({ baseRoute }) => {
                   </Button>
                 )}
               </tr>
-            ))}
+            ))
+          ) : (
+            <p>داده ای وجود ندارد</p>
+          )}
         </tbody> */}
       </table>
     </>

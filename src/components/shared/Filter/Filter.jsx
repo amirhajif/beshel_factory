@@ -16,12 +16,6 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import Label from "../Label";
 
 const Filter = ({ options }) => {
-  try {
-    if (options.machines) sendNotif("باموفقیت بارگذاری شد", "success");
-    else throw new Error("Error");
-  } catch (err) {
-    sendNotif("خطایی رخ داده", "error");
-  }
   const searchParams = useSearchParams();
 
   const { replace } = useRouter();
