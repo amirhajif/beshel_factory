@@ -23,7 +23,7 @@ const ReportMiniTable = ({ baseRoute }) => {
       setData(
         response.data.results.map((result) => ({
           id: result?.id,
-          date: new DateObject(result[0]?.created_at)
+          date: new DateObject(result?.created_at)
             .convert(persian, persian_fa)
             .format(),
           operator: `${result?.operator?.first_name}  ${result?.operator?.last_name}`,
