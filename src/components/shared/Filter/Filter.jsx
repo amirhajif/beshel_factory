@@ -58,7 +58,9 @@ const Filter = ({ options }) => {
           finishedAt.convert(Gregorian, Gregorian_en).format("YYYY-MM-DD")
         )
       : params.delete("finishedAt");
-    machine != "" ? params.set("machine", machine) : params.delete("machine");
+    machine != ""
+      ? params.set("machine", Number(machine))
+      : params.delete("machine");
     replace(`${pathname}?${params}`);
   };
 
