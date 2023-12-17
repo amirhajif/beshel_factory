@@ -7,6 +7,7 @@ import DashboardWrapper from "@/components/layouts/DashboardWrapper";
 import PlannerNavbarItems from "@/constants/PlannerNavbarItems";
 import Filter from "@/components/shared/Filter";
 import Routes from "@/constants/Routes";
+import getMachines from "@/apis/getMachines";
 
 export const generateMetadata = async () => {
   return {
@@ -16,11 +17,14 @@ export const generateMetadata = async () => {
 };
 
 const Planner = async () => {
+  const machineRequest = await getMachines();
+  const machines = machineRequest?.data?.results;
+
   return (
     <DashboardWrapper navItems={PlannerNavbarItems}>
       <DashboardContent>
         <div className="costume-scroll overflow-scroll xs:w-[100%] w-[95%] h-[90%]">
-          <Filter />
+          <Filter options={{ machines: machines }} />
           <ReportMiniTable
             headers={ReportsTableHeaders}
             datas={MiniReportsMocksData}
