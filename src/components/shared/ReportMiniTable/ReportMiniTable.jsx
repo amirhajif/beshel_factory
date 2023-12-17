@@ -8,6 +8,10 @@ import ReportsTableHeaders from "@/constants/ReportsTableHeaders";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import getReports from "@/apis/getReports";
+import { DateObject } from "react-multi-date-picker";
+import persian from "react-date-object/calendars/persian";
+import persian_fa from "react-date-object/locales/persian_fa";
+import ReportStatus from "@/constants/ReportStatus";
 
 const ReportMiniTable = ({ baseRoute }) => {
   const [data, setData] = useState(null);
@@ -15,8 +19,24 @@ const ReportMiniTable = ({ baseRoute }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      let response = await getReports();
-      setData(response.data.results);
+      let response = await getReports(searchParams);
+      setData(
+        response.data.results.map((result) => ({
+          id: result?.id,
+          date: new DateObject(result[0]?.created_at)
+            .convert(persian, persian_fa)
+            .format(),
+          operator: `${result?.operator?.first_name}  ${result?.operator?.last_name}`,
+          machine: result?.machine?.title,
+          status:
+            result?.status === ReportStatus?.Accepted?.key
+              ? ReportStatus?.Accepted?.title
+              : result?.status === ReportStatus?.Rejected?.key
+              ? ReportStatus?.Rejected?.title
+              : ReportStatus?.Pending?.title,
+          dummy: "",
+        }))
+      );
     };
 
     fetchData();
@@ -38,7 +58,7 @@ const ReportMiniTable = ({ baseRoute }) => {
           </tr>
         </thead>
 
-        {/* <tbody>
+        <tbody>
           {data && data.length > 0 ? (
             data.map((item, index) => (
               <tr
@@ -58,9 +78,11 @@ const ReportMiniTable = ({ baseRoute }) => {
               </tr>
             ))
           ) : (
-            <p>داده ای وجود ندارد</p>
+            <p className="text-center p-3 font-bold text-sm">
+              داده ای وجود ندارد
+            </p>
           )}
-        </tbody> */}
+        </tbody>
       </table>
     </>
   );
