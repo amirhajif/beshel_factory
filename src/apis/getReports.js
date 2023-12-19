@@ -5,7 +5,7 @@ const {
 const getReports = async (params) => {
   try {
     return await axiosInterceptorInstance.get(
-      `/reports${params ? `?${params}` : ""}`
+      `/reports${params ? `?${params}` : " "}`
     );
   } catch (error) {
     throw new Error(error);

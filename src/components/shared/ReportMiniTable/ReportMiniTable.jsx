@@ -19,7 +19,7 @@ const ReportMiniTable = ({ baseRoute }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      let response = await getReports(searchParams);
+      let response = await getReports(searchParams.toString());
       setData(
         response.data.results.map((result) => ({
           id: result?.id,
