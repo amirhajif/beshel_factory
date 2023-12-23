@@ -53,8 +53,8 @@ const Filter = ({ options }) => {
         )
       : params.delete("finishedAt");
     machine != ""
-      ? params.set("machine", Number(machine))
-      : params.delete("machine");
+      ? params.set("machine__id", Number(machine))
+      : params.delete("machine__id");
     replace(`${pathname}?${params}`);
   };
 
