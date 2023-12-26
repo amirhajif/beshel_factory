@@ -6,18 +6,10 @@ export const AddReportFormSchema = z.object({
   ended_at: z.coerce.string(),
   defective_parts_count: z.coerce.number(),
   intact_parts_count: z.coerce.number(),
-  stop_controller_1_code: z.coerce.string(),
-  stop_controller_1_time: z.coerce.number(),
-  stop_controller_2_code: z.coerce.string(),
-  stop_controller_2_time: z.coerce.number(),
-  stop_controller_3_code: z.coerce.string(),
-  stop_controller_3_time: z.coerce.number(),
-  stop_controller_4_code: z.coerce.string(),
-  stop_controller_4_time: z.coerce.number(),
 });
 
 export const AddReportFormFields = Object.freeze({
-  order: { title: "order", placeholder: "شناسه سفارش", listId: "ordersId" },
+  order: { title: "order", placeholder: "کد سفارش", listId: "ordersId" },
   ended_at: { title: "ended_at", placeholder: "تاریخ" },
   operator: { title: "operator", placeholder: "شناسه اپراتور" },
   machine: { title: "machine", placeholder: "ماشین", listId: "machinesId" },
@@ -34,6 +26,7 @@ export const AddReportFormFields = Object.freeze({
   stop_controller_1_code: {
     title: "stop_controller_1_code",
     placeholder: "کد کنترل توقف 1",
+    listId: "stopCode1List",
   },
   stop_controller_1_time: {
     title: "stop_controller_1_time",
@@ -42,6 +35,7 @@ export const AddReportFormFields = Object.freeze({
   stop_controller_2_code: {
     title: "stop_controller_2_code",
     placeholder: "کد کنترل توقف 2",
+    listId: "stopCode2List",
   },
   stop_controller_2_time: {
     title: "stop_controller_2_time",
@@ -50,6 +44,7 @@ export const AddReportFormFields = Object.freeze({
   stop_controller_3_code: {
     title: "stop_controller_3_code",
     placeholder: "کد کنترل توقف 3",
+    listId: "stopCode3List",
   },
   stop_controller_3_time: {
     title: "stop_controller_3_time",
@@ -58,6 +53,7 @@ export const AddReportFormFields = Object.freeze({
   stop_controller_4_code: {
     title: "stop_controller_4_code",
     placeholder: "کد کنترل توقف 4",
+    listId: "stopCode4List",
   },
   stop_controller_4_time: {
     title: "stop_controller_4_time",

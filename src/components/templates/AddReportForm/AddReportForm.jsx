@@ -21,7 +21,8 @@ import { addReport } from "@/apis/addReport";
 
 import sendNotif from "@/utils/sendNotif";
 import ReportStatus from "@/constants/ReportStatus";
-
+import StopCodeGuidance from "../StopCodeGuidance";
+import StopGuidanceCodes from "@/constants/StopGuidanceCodes";
 const AddReportForm = ({ machines, orders }) => {
   try {
     if (machines && orders) sendNotif("باموفقیت بارگذاری شد", "success");
@@ -35,7 +36,6 @@ const AddReportForm = ({ machines, orders }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    e.target.reset();
 
     let { data } = createObjectFromForm(e.target.elements, AddReportFormSchema);
 
@@ -51,53 +51,60 @@ const AddReportForm = ({ machines, orders }) => {
         e.target.elements.namedItem(AddReportFormFields?.machine?.title).value
       ),
       status: ReportStatus?.Pending?.key,
+      stop_controller_1_code: e.target.elements.namedItem(
+        AddReportFormFields?.stop_controller_1_code?.title
+      ).value,
+      stop_controller_1_time: Number(
+        e.target.elements.namedItem(
+          AddReportFormFields?.stop_controller_1_time?.title
+        ).value
+      ),
+
+      stop_controller_2_code: e.target.elements.namedItem(
+        AddReportFormFields?.stop_controller_2_code?.title
+      ).value,
+      stop_controller_2_time: Number(
+        e.target.elements.namedItem(
+          AddReportFormFields?.stop_controller_2_time?.title
+        ).value
+      ),
+
+      stop_controller_3_code: e.target.elements.namedItem(
+        AddReportFormFields?.stop_controller_3_code?.title
+      ).value,
+      stop_controller_3_time: Number(
+        e.target.elements.namedItem(
+          AddReportFormFields?.stop_controller_3_time?.title
+        ).value
+      ),
+
+      stop_controller_4_code: e.target.elements.namedItem(
+        AddReportFormFields?.stop_controller_4_code?.title
+      ).value,
+      stop_controller_4_time: Number(
+        e.target.elements.namedItem(
+          AddReportFormFields?.stop_controller_4_time?.title
+        ).value
+      ),
     };
 
-    try {
-      await addReport(data);
-      sendNotif("با موفقیت ایجاد شد", "success");
-    } catch (err) {
-      sendNotif("خطایی رخ داد", "error");
-    }
+    console.log(data);
+    e.target.reset();
+
+    // try {
+    //   await addReport(data);
+    //   sendNotif("با موفقیت ایجاد شد", "success");
+    // } catch (err) {
+    //   sendNotif("خطایی رخ داد", "error");
+    // }
   };
   return (
     <form
       className="w-full h-[80%] costume-scroll overflow-scroll max-w-lg flex gap-y-3 flex-wrap -mx-3 mb-6"
       onSubmit={handleSubmit}>
-      <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-        <Label
-          className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-          forValue={AddReportFormFields?.ended_at?.title}
-          text={AddReportFormFields?.ended_at?.placeholder}
-        />
-        <DatePicker
-          id={AddReportFormFields?.ended_at?.title}
-          style={{ cursor: "pointer", padding: "20px", width: "100%" }}
-          value={inputDate}
-          onChange={setInputDate}
-          calendar={persian}
-          locale={persian_fa}
-        />
+      <div className="w-full my-2">
+        <StopCodeGuidance />
       </div>
-      <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 ">
-        <Label
-          className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-          forValue={AddReportFormFields?.time?.title}
-          text={AddReportFormFields?.time?.placeholder}
-        />
-        <DatePicker
-          id={AddReportFormFields?.time?.title}
-          style={{ cursor: "pointer", padding: "20px", width: "100%" }}
-          value={inputTime}
-          onChange={setInputTime}
-          calendar={persian}
-          locale={persian_fa}
-          disableDayPicker
-          format="HH:mm"
-          plugins={[<TimePicker hideSeconds position="bottom" />]}
-        />
-      </div>
-
       <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 ">
         <Label
           className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
@@ -138,7 +145,39 @@ const AddReportForm = ({ machines, orders }) => {
           ))}
         </datalist>
       </div>
-
+      <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+        <Label
+          className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+          forValue={AddReportFormFields?.ended_at?.title}
+          text={AddReportFormFields?.ended_at?.placeholder}
+        />
+        <DatePicker
+          id={AddReportFormFields?.ended_at?.title}
+          style={{ cursor: "pointer", padding: "20px", width: "100%" }}
+          value={inputDate}
+          onChange={setInputDate}
+          calendar={persian}
+          locale={persian_fa}
+        />
+      </div>
+      <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 ">
+        <Label
+          className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+          forValue={AddReportFormFields?.time?.title}
+          text={AddReportFormFields?.time?.placeholder}
+        />
+        <DatePicker
+          id={AddReportFormFields?.time?.title}
+          style={{ cursor: "pointer", padding: "20px", width: "100%" }}
+          value={inputTime}
+          onChange={setInputTime}
+          calendar={persian}
+          locale={persian_fa}
+          disableDayPicker
+          format="HH:mm"
+          plugins={[<TimePicker hideSeconds position="bottom" />]}
+        />
+      </div>
       {AddReportFormSchema?.keyof()?._def?.values.map(
         (_key) =>
           _key !== AddReportFormFields?.ended_at?.title && (
@@ -148,6 +187,106 @@ const AddReportForm = ({ machines, orders }) => {
             />
           )
       )}
+
+      <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 ">
+        <Label
+          className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+          forValue={AddReportFormFields?.stop_controller_1_code?.title}
+          text={AddReportFormFields?.stop_controller_1_code?.placeholder}
+        />
+        <input
+          className="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+          list={AddReportFormFields?.stop_controller_1_code?.listId}
+          name={AddReportFormFields?.stop_controller_1_code?.title}
+          id={AddReportFormFields?.stop_controller_1_code?.title}
+          placeholder={AddReportFormFields?.stop_controller_1_code?.placeholder}
+        />
+        <datalist id={AddReportFormFields?.stop_controller_1_code?.listId}>
+          {StopGuidanceCodes.map(({ code, title }) => (
+            <option key={code} value={code}>
+              {title}
+            </option>
+          ))}
+        </datalist>
+      </div>
+      <ReportFormTextField
+        schema={AddReportFormFields?.stop_controller_1_time}
+      />
+
+      <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 ">
+        <Label
+          className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+          forValue={AddReportFormFields?.stop_controller_2_code?.title}
+          text={AddReportFormFields?.stop_controller_2_code?.placeholder}
+        />
+        <input
+          className="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+          list={AddReportFormFields?.stop_controller_2_code?.listId}
+          name={AddReportFormFields?.stop_controller_2_code?.title}
+          id={AddReportFormFields?.stop_controller_2_code?.title}
+          placeholder={AddReportFormFields?.stop_controller_2_code?.placeholder}
+        />
+        <datalist id={AddReportFormFields?.stop_controller_2_code?.listId}>
+          {StopGuidanceCodes.map(({ code, title }) => (
+            <option key={code} value={code}>
+              {title}
+            </option>
+          ))}
+        </datalist>
+      </div>
+      <ReportFormTextField
+        schema={AddReportFormFields?.stop_controller_2_time}
+      />
+
+      <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 ">
+        <Label
+          className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+          forValue={AddReportFormFields?.stop_controller_3_code?.title}
+          text={AddReportFormFields?.stop_controller_3_code?.placeholder}
+        />
+        <input
+          className="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+          list={AddReportFormFields?.stop_controller_3_code?.listId}
+          name={AddReportFormFields?.stop_controller_3_code?.title}
+          id={AddReportFormFields?.stop_controller_3_code?.title}
+          placeholder={AddReportFormFields?.stop_controller_3_code?.placeholder}
+        />
+        <datalist id={AddReportFormFields?.stop_controller_3_code?.listId}>
+          {StopGuidanceCodes.map(({ code, title }) => (
+            <option key={code} value={code}>
+              {title}
+            </option>
+          ))}
+        </datalist>
+      </div>
+      <ReportFormTextField
+        schema={AddReportFormFields?.stop_controller_3_time}
+      />
+
+      <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 ">
+        <Label
+          className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+          forValue={AddReportFormFields?.stop_controller_4_code?.title}
+          text={AddReportFormFields?.stop_controller_4_code?.placeholder}
+        />
+        <input
+          className="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+          list={AddReportFormFields?.stop_controller_4_code?.listId}
+          name={AddReportFormFields?.stop_controller_4_code?.title}
+          id={AddReportFormFields?.stop_controller_4_code?.title}
+          placeholder={AddReportFormFields?.stop_controller_4_code?.placeholder}
+        />
+        <datalist id={AddReportFormFields?.stop_controller_4_code?.listId}>
+          {StopGuidanceCodes.map(({ code, title }) => (
+            <option key={code} value={code}>
+              {title}
+            </option>
+          ))}
+        </datalist>
+      </div>
+      <ReportFormTextField
+        schema={AddReportFormFields?.stop_controller_4_time}
+      />
 
       <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
         <Button className="bg-transparent hover:bg-green-500 w-full text-green-700 font-semibold hover:text-white mt-6  py-3 px-4 border border-green-500 hover:border-transparent rounded">
