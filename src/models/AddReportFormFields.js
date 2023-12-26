@@ -10,10 +10,12 @@ export const AddReportFormSchema = z.object({
 
 export const AddReportFormFields = Object.freeze({
   order: { title: "order", placeholder: "کد سفارش", listId: "ordersId" },
-  ended_at: { title: "ended_at", placeholder: "تاریخ" },
+  ended_at: { title: "ended_at", placeholder: "زمان پایان" },
+  started_at: { title: "started_at", placeholder: "زمان شروع" },
+  date: { title: "date", placeholder: "تاریخ" },
   operator: { title: "operator", placeholder: "شناسه اپراتور" },
   machine: { title: "machine", placeholder: "ماشین", listId: "machinesId" },
-  time: { title: "time", placeholder: "زمان" },
+
   standard_time: { title: "standard_time", placeholder: "St(m)" },
   intact_parts_count: {
     title: "intact_parts_count",

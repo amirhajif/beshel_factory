@@ -25,25 +25,37 @@ import StopCodeGuidance from "../StopCodeGuidance";
 import StopGuidanceCodes from "@/constants/StopGuidanceCodes";
 const AddReportForm = ({ machines, orders }) => {
   try {
-    if (machines && orders) sendNotif("باموفقیت بارگذاری شد", "success");
-    else throw new Error("Error");
+    if (machines && orders) {
+    } else throw new Error("Error");
   } catch (err) {
     sendNotif("خطایی رخ داده", "error");
   }
 
   let [inputDate, setInputDate] = useState(new DateObject());
-  let [inputTime, setInputTime] = useState(new DateObject());
+  let [startTime, setStartTime] = useState(new DateObject());
+  let [endedTime, setEndedTime] = useState(new DateObject());
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     let { data } = createObjectFromForm(e.target.elements, AddReportFormSchema);
 
+    /**
+     * new Date(
+        new DateObject(inputDate.convert(gregorian, gregorian_en)).toUnix()
+      ).toISOString()
+     */
     data = {
       ...data,
-      [AddReportFormFields?.ended_at?.title]: new Date(
-        new DateObject(inputDate.convert(gregorian, gregorian_en)).toUnix()
-      ).toISOString(),
+      [AddReportFormFields?.date?.title]: new DateObject(
+        inputDate.convert(gregorian, gregorian_en)
+      ).format(),
+      [AddReportFormFields?.started_at?.title]: new DateObject(
+        startTime.convert(gregorian, gregorian_en)
+      ).format("HH:MM:SS"),
+      [AddReportFormFields?.ended_at?.title]: new DateObject(
+        endedTime.convert(gregorian, gregorian_en)
+      ).format("HH:MM:SS"),
       order: Number(
         e.target.elements.namedItem(AddReportFormFields?.order?.title).value
       ),
@@ -89,7 +101,7 @@ const AddReportForm = ({ machines, orders }) => {
     };
 
     console.log(data);
-    e.target.reset();
+    //e.target.reset();
 
     // try {
     //   await addReport(data);
@@ -145,14 +157,15 @@ const AddReportForm = ({ machines, orders }) => {
           ))}
         </datalist>
       </div>
+
       <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
         <Label
           className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-          forValue={AddReportFormFields?.ended_at?.title}
-          text={AddReportFormFields?.ended_at?.placeholder}
+          forValue={AddReportFormFields?.date?.title}
+          text={AddReportFormFields?.date?.placeholder}
         />
         <DatePicker
-          id={AddReportFormFields?.ended_at?.title}
+          id={AddReportFormFields?.date?.title}
           style={{ cursor: "pointer", padding: "20px", width: "100%" }}
           value={inputDate}
           onChange={setInputDate}
@@ -163,14 +176,32 @@ const AddReportForm = ({ machines, orders }) => {
       <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 ">
         <Label
           className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-          forValue={AddReportFormFields?.time?.title}
-          text={AddReportFormFields?.time?.placeholder}
+          forValue={AddReportFormFields?.started_at?.title}
+          text={AddReportFormFields?.started_at?.placeholder}
         />
         <DatePicker
-          id={AddReportFormFields?.time?.title}
+          id={AddReportFormFields?.started_at?.title}
           style={{ cursor: "pointer", padding: "20px", width: "100%" }}
-          value={inputTime}
-          onChange={setInputTime}
+          value={startTime}
+          onChange={setStartTime}
+          calendar={persian}
+          locale={persian_fa}
+          disableDayPicker
+          format="HH:mm"
+          plugins={[<TimePicker hideSeconds position="bottom" />]}
+        />
+      </div>
+      <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 ">
+        <Label
+          className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+          forValue={AddReportFormFields?.ended_at?.title}
+          text={AddReportFormFields?.ended_at?.placeholder}
+        />
+        <DatePicker
+          id={AddReportFormFields?.ended_at?.title}
+          style={{ cursor: "pointer", padding: "20px", width: "100%" }}
+          value={endedTime}
+          onChange={setEndedTime}
           calendar={persian}
           locale={persian_fa}
           disableDayPicker
