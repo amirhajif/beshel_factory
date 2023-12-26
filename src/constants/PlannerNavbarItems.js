@@ -27,6 +27,12 @@ export const PlannerNavbarItems = [
     to: "/planner/addcompany",
     icon: <AddBoxIcon sx={{ color: grey[50] }} />,
   },
+  {
+    id: 5,
+    link: "افزودن اپراتور",
+    to: "/planner/addoperator",
+    icon: <AddBoxIcon sx={{ color: grey[50] }} />,
+  },
 ];
 
 export default PlannerNavbarItems;
