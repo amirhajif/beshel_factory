@@ -40,16 +40,11 @@ const AddReportForm = ({ machines, orders }) => {
 
     let { data } = createObjectFromForm(e.target.elements, AddReportFormSchema);
 
-    /**
-     * new Date(
-        new DateObject(inputDate.convert(gregorian, gregorian_en)).toUnix()
-      ).toISOString()
-     */
     data = {
       ...data,
       [AddReportFormFields?.date?.title]: new DateObject(
         inputDate.convert(gregorian, gregorian_en)
-      ).format(),
+      ).format("YYYY-MM-DD"),
       [AddReportFormFields?.started_at?.title]: new DateObject(
         startTime.convert(gregorian, gregorian_en)
       ).format("HH:MM:SS"),
@@ -100,15 +95,14 @@ const AddReportForm = ({ machines, orders }) => {
       ),
     };
 
-    console.log(data);
-    //e.target.reset();
+    e.target.reset();
 
-    // try {
-    //   await addReport(data);
-    //   sendNotif("با موفقیت ایجاد شد", "success");
-    // } catch (err) {
-    //   sendNotif("خطایی رخ داد", "error");
-    // }
+    try {
+      await addReport(data);
+      sendNotif("با موفقیت ایجاد شد", "success");
+    } catch (err) {
+      sendNotif("خطایی رخ داد", "error");
+    }
   };
   return (
     <form

@@ -2,6 +2,8 @@ export const ReportsDetailedTableHeaders = [
   "ردیف",
   "شناسه",
   "تاریخ",
+  "زمان شروع",
+  "زمان پایان",
   "اپراتور",
   "ماشین",
   "St(m)",

@@ -11,6 +11,8 @@ import ReportStatus from "@/constants/ReportStatus";
 import { DateObject } from "react-multi-date-picker";
 import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
+import gregorian from "react-date-object/calendars/gregorian";
+import gregorian_en from "react-date-object/locales/gregorian_en";
 import { useRouter } from "next/navigation";
 import updateReport from "@/apis/updateReport";
 import sendNotif from "@/utils/sendNotif";
@@ -19,6 +21,10 @@ const Report = ({ params }) => {
   const router = useRouter();
 
   const [data, setData] = useState(null);
+  const [originalDate, setOriginalDate] = useState(null);
+  const [operatorId, setOperatorId] = useState(null);
+  const [machineId, setMachineId] = useState(null);
+  const [orderId, setOrderId] = useState(null);
 
   const { id } = params || "";
 
@@ -26,11 +32,19 @@ const Report = ({ params }) => {
     const fetchData = async (id) => {
       let response = await getReportById(id);
       const result = response.data.data;
+
+      setOriginalDate(result?.date);
+      setOperatorId(result?.operator?.id);
+      setMachineId(result?.machine?.id);
+      setOrderId(result?.order?.id);
+
       setData({
         id: result?.id,
-        created_at: new DateObject(result?.created_at)
+        date: new DateObject(result?.date)
           .convert(persian, persian_fa)
-          .format(),
+          .format("YYYY/MM/DD"),
+        started_at: result?.started_at,
+        ended_at: result?.ended_at,
         operator: `${result?.operator?.first_name}  ${result?.operator?.last_name}`,
         machine: result?.machine?.title,
         standard_time: result?.standard_time,
@@ -58,11 +72,19 @@ const Report = ({ params }) => {
 
   const handleAcceptReject = async (status) => {
     try {
-      await updateReport(id, { ...data, status: status });
+      console.log(operatorId);
+      await updateReport(id, {
+        ...data,
+        status: status,
+        date: originalDate,
+        operator: operatorId,
+        machine: machineId,
+        order: orderId,
+      });
       sendNotif("با موفقیت صورت گرفت", "success");
     } catch (err) {
       sendNotif("خطایی رخ داد", "error");
-      router.refresh();
+      //router.refresh();
     }
   };
 
