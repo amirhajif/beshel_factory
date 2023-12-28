@@ -4,7 +4,7 @@ const {
 
 export const updateReport = async (id, data) => {
   try {
-    return await axiosInterceptorInstance.put(`/reports/${id}`, data);
+    return await axiosInterceptorInstance.put(`/reports/${id}/`, data);
   } catch (error) {
     throw new Error(error);
   }

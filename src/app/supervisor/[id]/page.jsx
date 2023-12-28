@@ -18,7 +18,7 @@ import updateReport from "@/apis/updateReport";
 import sendNotif from "@/utils/sendNotif";
 
 const Report = ({ params }) => {
-  const router = useRouter();
+  const [dummy, setDummy] = useState(0);
 
   const [data, setData] = useState(null);
   const [originalDate, setOriginalDate] = useState(null);
@@ -68,7 +68,7 @@ const Report = ({ params }) => {
     };
 
     fetchData(id);
-  }, []);
+  }, [dummy]);
 
   const handleAcceptReject = async (status) => {
     try {
@@ -84,8 +84,9 @@ const Report = ({ params }) => {
       sendNotif("با موفقیت صورت گرفت", "success");
     } catch (err) {
       sendNotif("خطایی رخ داد", "error");
-      //router.refresh();
     }
+
+    setDummy((prev) => prev + 1);
   };
 
   return (
