@@ -1,8 +1,6 @@
 import createTdFromObject from "@/utils/createTdFromObject";
-import ReportStatus from "@/constants/ReportStatus";
-import Button from "@/components/shared/Button";
 
-const Table = ({ headers, datas, callback }) => {
+const Table = ({ headers, datas }) => {
   return (
     <div className="costume-scroll overflow-scroll xs:w-[100%] w-[95%] h-[90%]">
       <table className="text-sm w-[100%]">

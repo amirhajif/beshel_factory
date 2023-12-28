@@ -21,21 +21,23 @@ const ReportMiniTable = ({ baseRoute }) => {
     const fetchData = async () => {
       let response = await getReports(searchParams.toString());
       setData(
-        response.data.results.map((result) => ({
-          id: result?.id,
-          date: new DateObject(result?.created_at)
-            .convert(persian, persian_fa)
-            .format(),
-          operator: `${result?.operator?.first_name}  ${result?.operator?.last_name}`,
-          machine: result?.machine?.title,
-          status:
-            result?.status === ReportStatus?.Accepted?.key
-              ? ReportStatus?.Accepted?.title
-              : result?.status === ReportStatus?.Rejected?.key
-              ? ReportStatus?.Rejected?.title
-              : ReportStatus?.Pending?.title,
-          dummy: "",
-        }))
+        response.data.results
+          .map((result) => ({
+            id: result?.id,
+            date: new DateObject(result?.created_at)
+              .convert(persian, persian_fa)
+              .format(),
+            operator: `${result?.operator?.first_name}  ${result?.operator?.last_name}`,
+            machine: result?.machine?.title,
+            status:
+              result?.status === ReportStatus?.Accepted?.key
+                ? ReportStatus?.Accepted?.title
+                : result?.status === ReportStatus?.Rejected?.key
+                ? ReportStatus?.Rejected?.title
+                : ReportStatus?.Pending?.title,
+            dummy: "",
+          }))
+          .reverse()
       );
     };
 

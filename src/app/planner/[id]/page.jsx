@@ -14,8 +14,6 @@ import persian_fa from "react-date-object/locales/persian_fa";
 import ReportStatus from "@/constants/ReportStatus";
 
 const Report = ({ params }) => {
-  const router = useRouter();
-
   const [data, setData] = useState(null);
 
   const { id } = params || "";
@@ -26,9 +24,11 @@ const Report = ({ params }) => {
       const result = response.data.data;
       setData({
         id: result?.id,
-        created_at: new DateObject(result?.created_at)
+        date: new DateObject(result?.date)
           .convert(persian, persian_fa)
-          .format(),
+          .format("YYYY/MM/DD"),
+        started_at: result?.started_at,
+        ended_at: result?.ended_at,
         operator: `${result?.operator?.first_name}  ${result?.operator?.last_name}`,
         machine: result?.machine?.title,
         standard_time: result?.standard_time,
@@ -53,9 +53,6 @@ const Report = ({ params }) => {
 
     fetchData(id);
   }, []);
-  // const handleAcceptReject = (status) => {
-  //   console.log(`report ${id} new status will be ${status}`);
-  // };
 
   return (
     <div className="h-[100vh] flex flex-col p-3 bg-slate-200">
