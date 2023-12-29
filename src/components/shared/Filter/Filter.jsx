@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "../Button";
 import Select from "../Select";
 import StatusOptions from "@/constants/StatusOptions";
@@ -14,6 +14,7 @@ import "react-multi-date-picker/styles/colors/red.css";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import Label from "../Label";
+import { TextField } from "@mui/material";
 
 const Filter = ({ options }) => {
   const searchParams = useSearchParams();
@@ -42,15 +43,15 @@ const Filter = ({ options }) => {
     status != "" ? params.set("status", status) : params.delete("status");
     startedAt != ""
       ? params.set(
-          "startedAt",
-          startedAt.convert(Gregorian, Gregorian_en).format("YYYY-MM-DD")
-        )
+        "startedAt",
+        startedAt.convert(Gregorian, Gregorian_en).format("YYYY-MM-DD")
+      )
       : params.delete("startedAt");
     finishedAt != ""
       ? params.set(
-          "finishedAt",
-          finishedAt.convert(Gregorian, Gregorian_en).format("YYYY-MM-DD")
-        )
+        "finishedAt",
+        finishedAt.convert(Gregorian, Gregorian_en).format("YYYY-MM-DD")
+      )
       : params.delete("finishedAt");
     machine != ""
       ? params.set("machine__id", Number(machine))
@@ -58,20 +59,48 @@ const Filter = ({ options }) => {
     replace(`${pathname}?${params}`);
   };
 
+  useEffect(() => {
+    console.log(options.orders)
+  }, [])
+
   return (
     <form
       className="p-2 w-full flex flex-wrap gap-1 items-center justify-evenly"
       onSubmit={onSubmit}>
+
       <Select
-        parentClassName="w-full md:w-1/5 "
+        parentClassName="w-full md:w-1/4 "
         labelClassName="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-        forValue="status"
-        text="وضعیت"
+        forValue="order"
+        text="کد سفارش"
         selectClassName="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-        selectId="status"
-        options={StatusOptions}
+        selectId="order"
+        options={options.orders}
+        isOrder={true}
       />
-      <div className="w-full md:w-1/5">
+
+
+      <Select
+        parentClassName="w-full md:w-1/4 "
+        labelClassName="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+        forValue="machine"
+        text="اپراتور"
+        selectClassName="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+        selectId="machine"
+        options={options.machines}
+      />
+
+      <Select
+        parentClassName="w-full md:w-1/4 "
+        labelClassName="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+        forValue="machine"
+        text="ماشین"
+        selectClassName="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+        selectId="machine"
+        options={options.machines}
+      />
+
+      <div className="w-full md:w-1/4">
         <Label
           className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
           forValue="startDate"
@@ -86,7 +115,8 @@ const Filter = ({ options }) => {
           className="red"
         />
       </div>
-      <div className="w-full md:w-1/5">
+
+      <div className="w-full md:w-1/4">
         <Label
           className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
           forValue="finishedAt"
@@ -102,16 +132,7 @@ const Filter = ({ options }) => {
           className="red"
         />
       </div>
-      <Select
-        parentClassName="w-full md:w-1/5 "
-        labelClassName="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-        forValue="machine"
-        text="ماشین"
-        selectClassName="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-        selectId="machine"
-        options={options.machines}
-      />
-      <div className="w-full md:w-1/5 flex gap-2">
+      <div className="w-full md:w-1/4 flex gap-2">
         <Button className="bg-transparent hover:bg-green-500 w-1/2 text-green-700 font-light text-sm hover:text-white mt-6  py-1 px-4 border border-green-500 hover:border-transparent rounded">
           اعمال فیلتر
         </Button>
