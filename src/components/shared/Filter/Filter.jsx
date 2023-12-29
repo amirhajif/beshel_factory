@@ -35,59 +35,72 @@ const Filter = ({ options }) => {
   const onSubmit = async (e) => {
     e.preventDefault();
     let formsElements = e.target.elements;
-    let status = formsElements.namedItem(FilterFields?.status?.title)?.value;
 
+    let order_number = formsElements.namedItem(FilterFields?.order_number?.title)?.value;
     let machine = formsElements.namedItem(FilterFields?.machine?.title)?.value;
+    let operator_id = formsElements.namedItem(FilterFields?.operator_id?.title)?.value;
 
     const params = new URLSearchParams(searchParams);
-    status != "" ? params.set("status", status) : params.delete("status");
+
+    // set status at url
+    order_number != "" ? params.set("order_number", order_number) : params.delete("order_number");
+    // set operator id at url
+    operator_id != "" ? params.set("operator_id", operator_id) : params.delete("operator_id");
+    // set machine name at url
+    machine != ""
+      ? params.set("machine__id", Number(machine))
+      : params.delete("machine__id");
+
+    // set start date at url
     startedAt != ""
       ? params.set(
         "startedAt",
         startedAt.convert(Gregorian, Gregorian_en).format("YYYY-MM-DD")
       )
       : params.delete("startedAt");
+
+    // set finish date at url
     finishedAt != ""
       ? params.set(
         "finishedAt",
         finishedAt.convert(Gregorian, Gregorian_en).format("YYYY-MM-DD")
       )
       : params.delete("finishedAt");
-    machine != ""
-      ? params.set("machine__id", Number(machine))
-      : params.delete("machine__id");
+
     replace(`${pathname}?${params}`);
   };
 
-  useEffect(() => {
-    console.log(options.orders)
-  }, [])
+  // useEffect(() => {
+  //   console.log(options.operators)
+
+  // }, [])
 
   return (
     <form
       className="p-2 w-full flex flex-wrap gap-1 items-center justify-evenly"
       onSubmit={onSubmit}>
 
+      {/* select for order_number */}
       <Select
         parentClassName="w-full md:w-1/4 "
         labelClassName="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-        forValue="order"
+        forValue="order_number"
         text="کد سفارش"
         selectClassName="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-        selectId="order"
+        selectId="order_number"
         options={options.orders}
         isOrder={true}
       />
 
-
+      {/* select for operator */}
       <Select
         parentClassName="w-full md:w-1/4 "
         labelClassName="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-        forValue="machine"
+        forValue="operator_id"
         text="اپراتور"
         selectClassName="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-        selectId="machine"
-        options={options.machines}
+        selectId="operator_id"
+        options={options.operators}
       />
 
       <Select

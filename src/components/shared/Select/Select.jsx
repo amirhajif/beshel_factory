@@ -16,6 +16,7 @@ const Select = ({
             <Label className={labelClassName} forValue={forValue} text={text} />
             <div className="relative">
                 <select className={selectClassName} id={selectId}>
+                    <option value=''>انتخاب کنید</option>
                     {options.map((option) => (
                         <option key={option.id} value={option.id}>{isOrder ? option.order_number : option.title}</option>
                     ))}

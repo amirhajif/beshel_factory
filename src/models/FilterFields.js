@@ -1,6 +1,6 @@
 export const FilterFields = Object.freeze({
-    status: { title: "status" },
-    date: { title: "date" },
+    order_number: { title: "order_number" },
+    operator_id: { title: "operator_id" },
     machine: { title: "machine" }
 });
 
