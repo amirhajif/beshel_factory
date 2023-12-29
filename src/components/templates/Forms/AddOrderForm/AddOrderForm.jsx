@@ -16,6 +16,8 @@ import AddOrderFormFields from '@/models/AddOrderFormFields'
 import { getAllParts, getAllClients, addOrder } from '@/apis/sampleApi'
 import sendNotif from '@/utils/sendNotif'
 
+import { useRouter } from 'next/navigation'
+
 const AddOrderForm = ({
     formClassName
 }) => {
@@ -23,6 +25,8 @@ const AddOrderForm = ({
     let [ended_at, setEnded_at] = useState('')
     const [parts, setParts] = useState([])
     const [companies, setCompanies] = useState([])
+
+    const router = useRouter()
 
     const resetForm = () => {
         const form = document.getElementById('form')
@@ -52,10 +56,14 @@ const AddOrderForm = ({
             "client": client
         })
 
-        response != undefined ?
+        if (response != undefined) {
+            console.log(response)
             sendNotif('سفارش ثبت شد', 'success', true, 'center', 2000)
-            :
+            router.push(`addorder/${response.data.id}`)
+        }
+        else {
             sendNotif('در ثبت سفارش شما مشکلی پیش آمده', 'error', true, 'center', 2000)
+        }
 
         resetForm()
     }
