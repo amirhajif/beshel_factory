@@ -1,19 +1,40 @@
+"use client"
 import getOrderById from '@/apis/getOrderById';
 import Image from 'next/image'
 import React from 'react'
 import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
 import { DateObject } from 'react-multi-date-picker';
+import { useRouter } from 'next/navigation'
+import Styles from './style.module.css'
+import Button from '@/components/shared/Button';
 
 
 const PrintPage = async ({ params }) => {
     const { id } = params;
     const orderRequest = await getOrderById(id);
     const order = orderRequest?.data?.data;
-    // console.log(orders)
+
+    const handlePrint = () => {
+        window.print()
+    }
+
+    const handleBack = () => {
+        location.href = "http://localhost:3000/planner/addorder"
+    }
 
     return (
         <>
+            <div className={`flex justify-center my-2 gap-2 ${Styles.noPrint}`}>
+                <Button className={`bg-green-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center`} onClickCallback={() => window.print()}>
+                    پرینت کارت سفارش
+                </Button>
+                <Button class="bg-red-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center" onClickCallback={() => location.href = "http://localhost:3000/planner/addorder"}>
+                    بازگشت
+                </Button>
+            </div >
+
+
             <div className='flex justify-center'>
                 <Image src='/welcome.png' width={800} height={800} />
             </div>

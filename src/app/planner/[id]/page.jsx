@@ -46,8 +46,8 @@ const Report = ({ params }) => {
           result?.status === ReportStatus?.Accepted?.key
             ? ReportStatus?.Accepted?.title
             : result?.status === ReportStatus?.Rejected?.key
-            ? ReportStatus?.Rejected?.title
-            : ReportStatus?.Pending?.title,
+              ? ReportStatus?.Rejected?.title
+              : ReportStatus?.Pending?.title,
       });
     };
 
