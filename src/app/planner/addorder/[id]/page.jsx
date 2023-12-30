@@ -5,7 +5,6 @@ import React from 'react'
 import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
 import { DateObject } from 'react-multi-date-picker';
-import { useRouter } from 'next/navigation'
 import Styles from './style.module.css'
 import Button from '@/components/shared/Button';
 
@@ -14,14 +13,6 @@ const PrintPage = async ({ params }) => {
     const { id } = params;
     const orderRequest = await getOrderById(id);
     const order = orderRequest?.data?.data;
-
-    const handlePrint = () => {
-        window.print()
-    }
-
-    const handleBack = () => {
-        location.href = "http://localhost:3000/planner/addorder"
-    }
 
     return (
         <>
