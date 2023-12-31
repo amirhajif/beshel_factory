@@ -6,6 +6,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { redirect } from "next/navigation";
 import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 const Sidebar = ({ navItems }) => {
   let path = usePathname();
 
@@ -19,8 +20,7 @@ const Sidebar = ({ navItems }) => {
         <p
           style={{ cursor: "pointer" }}
           onClick={() => {
-            localStorage.setItem("infos", null);
-            router.push("/");
+            Cookies.remove('token', { path: '/' })
           }}
           className="mx-2 mt-1 text-sm font-medium text-slate-300">
           خروج
@@ -32,9 +32,8 @@ const Sidebar = ({ navItems }) => {
           {navItems.map((item) => {
             return (
               <Link
-                className={`flex items-center px-4 py-3 text-gray-700 my-4 ${
-                  path === item.to ? "bg-indigo-700" : ""
-                } rounded-lg hover:bg-indigo-900`}
+                className={`flex items-center px-4 py-3 text-gray-700 my-4 ${path === item.to ? "bg-indigo-700" : ""
+                  } rounded-lg hover:bg-indigo-900`}
                 key={item.id}
                 href={item.to}>
                 {item.icon}

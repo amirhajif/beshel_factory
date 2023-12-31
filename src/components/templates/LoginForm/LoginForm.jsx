@@ -6,6 +6,8 @@ import TextField from "@/components/shared/TextField";
 import Button from "@/components/shared/Button";
 import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
+import login from "@/apis/Login";
+import Cookies from 'js-cookie'
 
 const LoginForm = () => {
   const router = useRouter();
@@ -32,6 +34,11 @@ const LoginForm = () => {
     let password = formsElements.namedItem(
       LoginFormFields?.Password?.title
     )?.value;
+
+    const response = await login({ username: username, password: password })
+    const token = response.data.data
+
+    Cookies.set('token', JSON.stringify(token), { expires: 7 });
 
     try {
     } catch (error) { }

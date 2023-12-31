@@ -1,6 +1,5 @@
 @media print {
     .noPrint {
         display: none;
-        color: blue;
     }
 }
