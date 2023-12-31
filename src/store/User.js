@@ -1,18 +1,12 @@
 import { create } from 'zustand'
 
 export const useUserInfos = create((set) => ({
-    id: '',
-    username: '',
-    role: '',
-    setUser: (info) => set((state) => ({
-        id: info.id,
-        username: info.username,
-        role: info.role
+    info: { id: '', username: '', role: '' },
+    setInfo: (data) => set((state) => ({
+        info: { ...state.info, id: data.id, username: data.username, role: data.role }
     })),
-    logoutUser: () => set((state) => ({
-        id: '',
-        username: '',
-        role: ''
+    deleteInfo: () => set((state) => ({
+        info: { ...state.info, id: '', username: '', role: '' }
     }))
 
 }))

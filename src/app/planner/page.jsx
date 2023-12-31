@@ -1,3 +1,4 @@
+"use client"
 import DashboardContent from "@/components/layouts/DashboardContent";
 import dynamic from "next/dynamic";
 import MiniReportsMocksData from "@/mocks/MiniReportsMocksData";
@@ -10,12 +11,12 @@ import getMachines from "@/apis/getMachines";
 import getOrders from "@/apis/getOrders";
 import { getOperators } from "@/apis/getOperators";
 
-export const generateMetadata = async () => {
-  return {
-    title: "پنل برنامه ریز",
-    description: "پنل برنامه ریز",
-  };
-};
+// export const generateMetadata = async () => {
+//   return {
+//     title: "پنل برنامه ریز",
+//     description: "پنل برنامه ریز",
+//   };
+// };
 
 const Planner = async () => {
   const DashboardWrapper = dynamic(

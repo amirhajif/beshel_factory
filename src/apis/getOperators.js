@@ -7,6 +7,7 @@ export const getOperators = async () => {
         return await axiosInterceptorInstance.get("/operators/filterData")
 
     } catch (error) {
-        throw new Error(error)
+        // throw new Error(error)
+        // console.log(error.data)
     }
 }

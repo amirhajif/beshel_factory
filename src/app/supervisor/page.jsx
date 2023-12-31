@@ -1,3 +1,4 @@
+"use client"
 import dynamic from "next/dynamic";
 import DashboardContent from "@/components/layouts/DashboardContent";
 
@@ -20,11 +21,14 @@ const Supervisor = async () => {
   const machineRequest = await getMachines();
   const machines = machineRequest?.data?.results;
 
+
   const ordersRequest = await getOrders();
   const orders = ordersRequest?.data?.results;
+  // console.log(orders)
 
   const operatorsRequest = await getOperators()
   const operators = operatorsRequest?.data?.results;
+  console.log(operators)
 
   return (
     <DashboardWrapper navItems={SupervisorNavbarItems}>

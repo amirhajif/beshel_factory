@@ -8,9 +8,14 @@ import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
 import login from "@/apis/Login";
 import Cookies from 'js-cookie'
+import { useUserInfos } from "@/store/User";
+import getUserInfo from "@/apis/getUserInfo";
+
 
 const LoginForm = () => {
   const router = useRouter();
+
+  const { info, setInfo, deleteInfo } = useUserInfos();
   useEffect(() => {
     if (typeof window !== "undefined") {
       // let userInfos = JSON.parse(localStorage.getItem("infos"));
@@ -38,13 +43,22 @@ const LoginForm = () => {
     const response = await login({ username: username, password: password })
     const token = response.data.data
 
-    Cookies.set('token', JSON.stringify(token), { expires: 7 });
+    Cookies.set('token', token.access, { expires: 7, secure: true, sameSite: 'Strict' });
+    Cookies.set('refreshToken', token.refresh, { expires: 7, secure: true, sameSite: 'Strict' });
+
+
+    const userInfo = await getUserInfo()
+    const user = userInfo.data.results[0]
+    // const userInfo = { id: 1, username: username, role: 'planner' }
+    setInfo({ id: user.id, username: user.username, role: user.role })
 
     try {
     } catch (error) { }
   };
   return (
     <div className="flex p-2 flex-col w-100 h-[100vh] bg-slate-200 items-center justify-center gap-10">
+      {/* <p>{JSON.stringify(info)}</p> */}
+      {/* <button onClick={deleteInfo}>delete</button> */}
       <p className="text-indigo-950 font-bold text-3xl">ورود به سامانه </p>
       <form
         onSubmit={handleFormSubmit}

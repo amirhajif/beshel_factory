@@ -9,6 +9,13 @@ import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 const Sidebar = ({ navItems }) => {
   let path = usePathname();
+  let router = useRouter()
+
+  const handleLogout = () => {
+    Cookies.remove('token')
+    Cookies.remove('refreshToken')
+    router.push('/')
+  }
 
   return (
     <div className="flex flex-col bg-indigo-950 w-[15%] h-screen px-4 py-8 overflow-y-auto  border-r rtl:border-r-0 rtl:border-l">
@@ -19,9 +26,7 @@ const Sidebar = ({ navItems }) => {
         </p>
         <p
           style={{ cursor: "pointer" }}
-          onClick={() => {
-            Cookies.remove('token', { path: '/' })
-          }}
+          onClick={handleLogout}
           className="mx-2 mt-1 text-sm font-medium text-slate-300">
           خروج
         </p>

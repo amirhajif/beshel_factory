@@ -17,7 +17,7 @@ const Select = ({
             <div className="relative">
                 <select className={selectClassName} id={selectId}>
                     <option value=''>انتخاب کنید</option>
-                    {options.map((option) => (
+                    {options && options.map((option) => (
                         <option key={option.id} value={option.id}>{isOrder ? option.order_number : option.title}</option>
                     ))}
                 </select>
