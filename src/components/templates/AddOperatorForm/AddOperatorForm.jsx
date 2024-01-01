@@ -6,14 +6,19 @@ import Button from "@/components/shared/Button";
 const AddOperatorForm = () => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    const name = e.target.elements.namedItem(
-      AddOperatorFormFields?.Name?.title
-    )?.value;
-    const codeMelli = e.target.elements.namedItem(
-      AddOperatorFormFields?.CodeMelli?.title
-    )?.value;
+    const data = {
+      [AddOperatorFormFields?.FirstName?.title]: e.target.elements.namedItem(
+        AddOperatorFormFields?.FirstName?.title
+      )?.value,
+      [AddOperatorFormFields?.LastName?.title]: e.target.elements.namedItem(
+        AddOperatorFormFields?.LastName?.title
+      )?.value,
+      [AddOperatorFormFields?.CodeMelli?.title]: e.target.elements.namedItem(
+        AddOperatorFormFields?.CodeMelli?.title
+      )?.value,
+    };
 
-    console.log(name, codeMelli);
+    console.log(data);
   };
 
   return (
@@ -23,9 +28,16 @@ const AddOperatorForm = () => {
       <input
         className="p-3 rounded-lg"
         type="text"
-        name={AddOperatorFormFields?.Name?.title}
-        id={AddOperatorFormFields?.Name?.title}
-        placeholder={AddOperatorFormFields?.Name?.placeholder}
+        name={AddOperatorFormFields?.FirstName?.title}
+        id={AddOperatorFormFields?.FirstName?.title}
+        placeholder={AddOperatorFormFields?.FirstName?.placeholder}
+      />
+      <input
+        className="p-3 rounded-lg"
+        type="text"
+        name={AddOperatorFormFields?.LastName?.title}
+        id={AddOperatorFormFields?.LastName?.title}
+        placeholder={AddOperatorFormFields?.LastName?.placeholder}
       />
       <input
         className="p-3 rounded-lg"
