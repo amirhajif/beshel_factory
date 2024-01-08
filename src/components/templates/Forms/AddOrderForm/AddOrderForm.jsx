@@ -57,7 +57,6 @@ const AddOrderForm = ({
         })
 
         if (response != undefined) {
-            console.log(response)
             sendNotif('سفارش ثبت شد', 'success', true, 'center', 2000)
             router.push(`addorder/${response.data.id}`)
         }

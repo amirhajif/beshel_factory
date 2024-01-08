@@ -9,6 +9,7 @@ const layout = ({ children }) => {
     const role = "supervisor"
     useEffect(() => {
         if (role != 'supervisor') {
+            ``
             return notFound()
         }
     }, [])
