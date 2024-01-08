@@ -15,7 +15,7 @@ import sendNotif from "@/utils/sendNotif";
 const LoginForm = () => {
   const router = useRouter();
 
-  const { setInfo } = useUserInfos();
+  const { setInfo, info } = useUserInfos();
   useEffect(() => {
     const token = Cookies.get("token");
     if (token) {
@@ -55,7 +55,6 @@ const LoginForm = () => {
   };
   return (
     <div className="flex p-2 flex-col w-100 h-[100vh] bg-slate-200 items-center justify-center gap-10">
-
       <p className="text-indigo-950 font-bold text-3xl">ورود به سامانه </p>
       <form
         onSubmit={handleFormSubmit}
