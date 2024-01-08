@@ -15,3 +15,24 @@ const AuthProvider = ({ children }) => {
 };
 
 export default AuthProvider;
+/**
+ *  // set info in zustand 1
+    // role 2
+    
+    /**
+     * 
+     * const enum ={
+     * planner:{
+     * 
+     *  routes:["planner" , "planner/..."]
+     * }
+     * ....
+     * }
+     * 
+     * let flag=false;
+     * enum[role].routes.map((route)=> )route === pathname) flag=true; 
+     * 
+     * 
+     * 
+     */
+ 
