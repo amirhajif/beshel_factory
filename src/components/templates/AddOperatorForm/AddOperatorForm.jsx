@@ -2,11 +2,13 @@
 import React from "react";
 import AddOperatorFormFields from "@/models/AddOperatorFormFields";
 import Button from "@/components/shared/Button";
+import addOperator from "@/apis/addOperator";
 
 const AddOperatorForm = () => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    const data = {
+
+    let data = {
       [AddOperatorFormFields?.FirstName?.title]: e.target.elements.namedItem(
         AddOperatorFormFields?.FirstName?.title
       )?.value,
@@ -18,7 +20,19 @@ const AddOperatorForm = () => {
       )?.value,
     };
 
-    console.log(data);
+    data = {
+      ...data,
+      username: `${
+        e.target.elements.namedItem(AddOperatorFormFields?.FirstName?.title)
+          ?.value
+      } ${
+        e.target.elements.namedItem(AddOperatorFormFields?.LastName?.title)
+          ?.value
+      }`,
+    };
+
+    let response = await addOperator(data);
+    console.log(response);
   };
 
   return (
