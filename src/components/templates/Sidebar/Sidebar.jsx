@@ -1,28 +1,28 @@
 "use client";
 import React from "react";
-import Avatar from "@/assets/userAvatar.webp";
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { redirect } from "next/navigation";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
+import { useUserInfos } from "@/store/User";
 const Sidebar = ({ navItems }) => {
   let path = usePathname();
   let router = useRouter()
+  const { info } = useUserInfos()
 
   const handleLogout = () => {
     Cookies.remove('token')
     Cookies.remove('refreshToken')
+    localStorage.removeItem("userInfo")
     router.push('/')
   }
 
   return (
     <div className="flex flex-col bg-indigo-950 w-[15%] h-screen px-4 py-8 overflow-y-auto  border-r rtl:border-r-0 rtl:border-l">
       <div className="flex flex-col items-center mx-2">
-        <h4 className="mx-2 mt-2 font-medium text-slate-200">علیرضا غلامپور</h4>
+        <h4 className="mx-2 mt-2 font-medium text-slate-200">{info.username}</h4>
         <p className="mx-2 mt-1 text-sm font-medium text-slate-300 d">
-          123456798
+          {info.id}
         </p>
         <p
           style={{ cursor: "pointer" }}

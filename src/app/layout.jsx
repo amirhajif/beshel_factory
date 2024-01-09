@@ -1,3 +1,4 @@
+import Cookies from "js-cookie";
 import "./globals.css";
 import AuthProvider from "@/components/layouts/AuthProvider";
 

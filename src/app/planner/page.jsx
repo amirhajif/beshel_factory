@@ -10,6 +10,8 @@ import Routes from "@/constants/Routes";
 import getMachines from "@/apis/getMachines";
 import getOrders from "@/apis/getOrders";
 import { getOperators } from "@/apis/getOperators";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 // export const generateMetadata = async () => {
 //   return {
@@ -36,7 +38,7 @@ const Planner = async () => {
   const operators = operatorsRequest?.data?.results;
 
   return (
-    <DashboardWrapper navItems={PlannerNavbarItems}>
+    <DashboardWrapper navItems={PlannerNavbarItems} >
       <DashboardContent>
         <div className="costume-scroll overflow-scroll xs:w-[100%] w-[95%] h-[90%]">
           <Filter options={{ machines: machines, orders: orders, operators: operators }} />

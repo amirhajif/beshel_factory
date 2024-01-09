@@ -15,7 +15,7 @@ import sendNotif from "@/utils/sendNotif";
 const LoginForm = () => {
   const router = useRouter();
 
-  const { setInfo, info } = useUserInfos();
+  const { setInfo } = useUserInfos();
   useEffect(() => {
     const token = Cookies.get("token");
     if (token) {
@@ -44,6 +44,8 @@ const LoginForm = () => {
       const userInfo = await getUserInfo()
       const user = userInfo.data.results[0]
       setInfo({ id: user.id, username: user.username, role: user.role })
+      // save user info in localStorage
+      localStorage.setItem('userInfo', JSON.stringify({ id: user.id, username: user.username, role: user.role }))
 
       sendNotif('با موفقیت وارد شدید', 'success', true, 'center', 2000)
       router.push(`/${user.role}`)
