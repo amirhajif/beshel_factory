@@ -23,6 +23,8 @@ import sendNotif from "@/utils/sendNotif";
 import ReportStatus from "@/constants/ReportStatus";
 import StopCodeGuidance from "../StopCodeGuidance";
 import StopGuidanceCodes from "@/constants/StopGuidanceCodes";
+import { useUserInfos } from "@/store/User";
+
 const AddReportForm = ({ machines, orders }) => {
   try {
     if (machines && orders) {
@@ -34,6 +36,7 @@ const AddReportForm = ({ machines, orders }) => {
   let [inputDate, setInputDate] = useState(new DateObject());
   let [startTime, setStartTime] = useState(new DateObject());
   let [endedTime, setEndedTime] = useState(new DateObject());
+  const { info } = useUserInfos();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -42,6 +45,7 @@ const AddReportForm = ({ machines, orders }) => {
 
     data = {
       ...data,
+      [AddReportFormFields?.operator?.title]: Number(info?.id),
       [AddReportFormFields?.date?.title]: new DateObject(
         inputDate.convert(gregorian, gregorian_en)
       ).format("YYYY-MM-DD"),
