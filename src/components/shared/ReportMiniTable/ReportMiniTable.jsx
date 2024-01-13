@@ -12,6 +12,9 @@ import { DateObject } from "react-multi-date-picker";
 import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
 import ReportStatus from "@/constants/ReportStatus";
+import * as XLSX from "xlsx";
+import { saveAs } from "file-saver";
+import FileDownloadIcon from "@mui/icons-material/FileDownload";
 
 const ReportMiniTable = ({ baseRoute }) => {
   const [data, setData] = useState(null);
@@ -23,13 +26,13 @@ const ReportMiniTable = ({ baseRoute }) => {
       setData(
         response.data.results
           .map((result) => ({
-            id: result?.id,
-            date: new DateObject(result?.created_at)
+            شناسه: result?.id,
+            تاریخ: new DateObject(result?.created_at)
               .convert(persian, persian_fa)
               .format(),
-            operator: `${result?.operator?.first_name}  ${result?.operator?.last_name}`,
-            machine: result?.machine?.title,
-            status:
+            اپراتور: `${result?.operator?.first_name}  ${result?.operator?.last_name}`,
+            ماشین: result?.machine?.title,
+            وضعیت:
               result?.status === ReportStatus?.Accepted?.key
                 ? ReportStatus?.Accepted?.title
                 : result?.status === ReportStatus?.Rejected?.key
@@ -44,8 +47,35 @@ const ReportMiniTable = ({ baseRoute }) => {
     fetchData();
   }, [searchParams]);
 
+  const handleExcelExport = () => {
+    const modifiedJsonData = data.map((obj) => {
+      const { dummy, ...rest } = obj;
+      return rest;
+    });
+
+    const worksheet = XLSX.utils.json_to_sheet(modifiedJsonData);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
+
+    // Buffer to store the generated Excel file
+    const excelBuffer = XLSX.write(workbook, {
+      bookType: "xlsx",
+      type: "array",
+    });
+    const blob = new Blob([excelBuffer], {
+      type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8",
+    });
+
+    saveAs(blob, "data.xlsx");
+  };
   return (
     <>
+      <button
+        onClick={handleExcelExport}
+        className="bg-green-700 text-sm text-slate-50 p-2 rounded-lg my-2">
+        <FileDownloadIcon />
+        <span> خروجی اکسل از جدول</span>
+      </button>
       <table className="text-sm w-[100%]">
         <thead className="border-b dark:border-neutral-500 text-slate-50 bg-slate-500">
           <tr className="text-center">
