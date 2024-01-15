@@ -15,13 +15,13 @@ import sendNotif from "@/utils/sendNotif";
 const LoginForm = () => {
   const router = useRouter();
 
-  const { setInfo } = useUserInfos();
-  useEffect(() => {
-    const token = Cookies.get("token");
-    if (token) {
-      return notFound()
-    }
-  }, []);
+  const { setInfo, info } = useUserInfos();
+  // useEffect(() => {
+  //   const token = Cookies.get("token");
+  //   if (token) {
+  //     router.push(`/${info.role}`)
+  //   }
+  // }, []);
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -43,12 +43,13 @@ const LoginForm = () => {
 
       const userInfo = await getUserInfo()
       const user = userInfo.data.results[0]
-      setInfo({ id: user.id, username: user.username, role: user.role })
+
+      setInfo({ id: user.id, username: user.username, role: user.roles[0].toLowerCase() })
       // save user info in localStorage
-      localStorage.setItem('userInfo', JSON.stringify({ id: user.id, username: user.username, role: user.role }))
+      localStorage.setItem('userInfo', JSON.stringify({ id: user.id, username: user.username, role: user.roles[0].toLowerCase() }))
 
       sendNotif('با موفقیت وارد شدید', 'success', true, 'center', 2000)
-      router.push(`/${user.role}`)
+      router.push(`/${user.roles[0].toLowerCase()}`)
 
     } catch (error) {
       sendNotif('اطلاعات وارد شده جهت ورود درست نمی باشد', 'error', true, 'center', 2000)

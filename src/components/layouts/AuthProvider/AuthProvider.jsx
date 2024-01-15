@@ -17,7 +17,7 @@ const AuthProvider = ({ children }) => {
     else {
       const user = JSON.parse(localStorage.getItem("userInfo"))
       setInfo(user)
-      !path.includes(user.role) && router.push(`/${user.role}`)
+      !path.includes(user.role.toLowerCase()) && router.push(`/${user.role}`)
     }
   }, []);
   return <section>{children}</section>;
