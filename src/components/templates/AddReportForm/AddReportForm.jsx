@@ -319,7 +319,7 @@ const AddReportForm = ({ machines, orders }) => {
 
       <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
         <Button className="bg-transparent hover:bg-green-500 w-full text-green-700 font-semibold hover:text-white mt-6  py-3 px-4 border border-green-500 hover:border-transparent rounded">
-          ثبت سفارش
+          ثبت گزارش
         </Button>
       </div>
     </form>

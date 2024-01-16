@@ -22,17 +22,14 @@ const AddOperatorForm = () => {
 
     data = {
       ...data,
-      username: `${
-        e.target.elements.namedItem(AddOperatorFormFields?.FirstName?.title)
+      username: `${e.target.elements.namedItem(AddOperatorFormFields?.FirstName?.title)
+        ?.value
+        }${e.target.elements.namedItem(AddOperatorFormFields?.LastName?.title)
           ?.value
-      } ${
-        e.target.elements.namedItem(AddOperatorFormFields?.LastName?.title)
-          ?.value
-      }`,
+        }`,
     };
 
     let response = await addOperator(data);
-    console.log(response);
   };
 
   return (
@@ -61,7 +58,7 @@ const AddOperatorForm = () => {
         placeholder={AddOperatorFormFields?.CodeMelli?.placeholder}
       />
       <Button className="bg-transparent hover:bg-green-500 w-full text-green-700 font-semibold hover:text-white mt-6  py-3 px-4 border border-green-500 hover:border-transparent rounded">
-        ثبت سفارش
+        افزودن اپراتور
       </Button>
     </form>
   );

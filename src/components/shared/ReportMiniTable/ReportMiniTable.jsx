@@ -36,8 +36,8 @@ const ReportMiniTable = ({ baseRoute }) => {
               result?.status === ReportStatus?.Accepted?.key
                 ? ReportStatus?.Accepted?.title
                 : result?.status === ReportStatus?.Rejected?.key
-                ? ReportStatus?.Rejected?.title
-                : ReportStatus?.Pending?.title,
+                  ? ReportStatus?.Rejected?.title
+                  : ReportStatus?.Pending?.title,
             dummy: "",
           }))
           .reverse()
@@ -95,16 +95,15 @@ const ReportMiniTable = ({ baseRoute }) => {
             data.map((item, index) => (
               <tr
                 key={`${item.id}_index`}
-                className={`border-b dark:border-neutral-500 text-xs text-center ${
-                  index % 2 === 1 ? "bg-slate-300" : "bg-slate-100"
-                }`}>
+                className={`border-b dark:border-neutral-500 text-xs text-center ${index % 2 === 1 ? "bg-slate-300" : "bg-slate-100"
+                  }`}>
                 {createTdFromObject(
                   item,
                   index,
                   "dummy",
                   "",
                   <Button>
-                    <Link href={`${baseRoute}/${item?.id}`}> مشاهده گزارش</Link>
+                    <Link href={`${baseRoute}/${item['شناسه']}`}> مشاهده گزارش</Link>
                   </Button>
                 )}
               </tr>

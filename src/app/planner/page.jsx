@@ -1,8 +1,5 @@
-"use client"
 import DashboardContent from "@/components/layouts/DashboardContent";
 import dynamic from "next/dynamic";
-import MiniReportsMocksData from "@/mocks/MiniReportsMocksData";
-import ReportsTableHeaders from "@/constants/ReportsTableHeaders";
 import ReportMiniTable from "@/components/shared/ReportMiniTable";
 import PlannerNavbarItems from "@/constants/PlannerNavbarItems";
 import Filter from "@/components/shared/Filter";
@@ -10,15 +7,7 @@ import Routes from "@/constants/Routes";
 import getMachines from "@/apis/getMachines";
 import getOrders from "@/apis/getOrders";
 import { getOperators } from "@/apis/getOperators";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
 
-// export const generateMetadata = async () => {
-//   return {
-//     title: "پنل برنامه ریز",
-//     description: "پنل برنامه ریز",
-//   };
-// };
 
 const Planner = async () => {
   const DashboardWrapper = dynamic(
