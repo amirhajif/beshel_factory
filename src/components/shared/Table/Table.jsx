@@ -2,7 +2,7 @@ import createTdFromObject from "@/utils/createTdFromObject";
 
 const Table = ({ headers, datas }) => {
   return (
-    <div className="costume-scroll overflow-scroll xs:w-[100%] w-[95%] h-[90%]">
+    <div className="costume-scroll p-2 overflow-scroll xs:w-[100%] w-[95%] h-[90%]">
       <table className="text-sm w-[100%]">
         <thead className="border-b dark:border-neutral-500 text-slate-50 bg-slate-500">
           <tr className="text-center">

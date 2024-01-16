@@ -27,6 +27,7 @@ const ReportMiniTable = ({ baseRoute }) => {
         response.data.results
           .map((result) => ({
             شناسه: result?.id,
+            کد_سفارش: result?.order?.order_number,
             تاریخ: new DateObject(result?.created_at)
               .convert(persian, persian_fa)
               .format(),
@@ -36,8 +37,8 @@ const ReportMiniTable = ({ baseRoute }) => {
               result?.status === ReportStatus?.Accepted?.key
                 ? ReportStatus?.Accepted?.title
                 : result?.status === ReportStatus?.Rejected?.key
-                  ? ReportStatus?.Rejected?.title
-                  : ReportStatus?.Pending?.title,
+                ? ReportStatus?.Rejected?.title
+                : ReportStatus?.Pending?.title,
             dummy: "",
           }))
           .reverse()
@@ -94,16 +95,20 @@ const ReportMiniTable = ({ baseRoute }) => {
           {data && data.length > 0 ? (
             data.map((item, index) => (
               <tr
-                key={`${item.id}_index`}
-                className={`border-b dark:border-neutral-500 text-xs text-center ${index % 2 === 1 ? "bg-slate-300" : "bg-slate-100"
-                  }`}>
+                key={`${item["شناسه"]}_index`}
+                className={`border-b dark:border-neutral-500 text-xs text-center ${
+                  index % 2 === 1 ? "bg-slate-300" : "bg-slate-100"
+                }`}>
                 {createTdFromObject(
                   item,
                   index,
                   "dummy",
                   "",
                   <Button>
-                    <Link href={`${baseRoute}/${item['شناسه']}`}> مشاهده گزارش</Link>
+                    <Link href={`${baseRoute}/${item["شناسه"]}`}>
+                      {" "}
+                      مشاهده گزارش
+                    </Link>
                   </Button>
                 )}
               </tr>

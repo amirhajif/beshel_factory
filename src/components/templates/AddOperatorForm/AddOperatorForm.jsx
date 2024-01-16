@@ -3,6 +3,7 @@ import React from "react";
 import AddOperatorFormFields from "@/models/AddOperatorFormFields";
 import Button from "@/components/shared/Button";
 import addOperator from "@/apis/addOperator";
+import sendNotif from "@/utils/sendNotif";
 
 const AddOperatorForm = () => {
   const handleFormSubmit = async (e) => {
@@ -22,14 +23,22 @@ const AddOperatorForm = () => {
 
     data = {
       ...data,
-      username: `${e.target.elements.namedItem(AddOperatorFormFields?.FirstName?.title)
-        ?.value
-        }${e.target.elements.namedItem(AddOperatorFormFields?.LastName?.title)
+      username: `${
+        e.target.elements.namedItem(AddOperatorFormFields?.FirstName?.title)
           ?.value
-        }`,
+      }${
+        e.target.elements.namedItem(AddOperatorFormFields?.LastName?.title)
+          ?.value
+      }`,
     };
-
-    let response = await addOperator(data);
+    try {
+      await addOperator(data);
+      sendNotif("با موفقیت ساخته شد.", "success");
+    } catch (err) {
+      sendNotif("خطایی رخ داد.", "error");
+      console.log(err);
+    }
+    e.target.reset();
   };
 
   return (

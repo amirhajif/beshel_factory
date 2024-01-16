@@ -1,6 +1,7 @@
 export const ReportsTableHeaders = [
   "ردیف",
   "شناسه",
+  "کد سفارش",
   "تاریخ",
   "اپراتور",
   "ماشین",

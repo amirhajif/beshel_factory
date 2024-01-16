@@ -33,6 +33,8 @@ const AddReportForm = ({ machines, orders }) => {
     sendNotif("خطایی رخ داده", "error");
   }
 
+  console.log(orders);
+
   let [inputDate, setInputDate] = useState(new DateObject());
   let [startTime, setStartTime] = useState(new DateObject());
   let [endedTime, setEndedTime] = useState(new DateObject());
@@ -129,8 +131,10 @@ const AddReportForm = ({ machines, orders }) => {
           placeholder={AddReportFormFields?.order?.placeholder}
         />
         <datalist id={AddReportFormFields?.order?.listId}>
-          {orders.map(({ id }) => (
-            <option key={`order${id}`} value={id}></option>
+          {orders.map(({ id, order_number }) => (
+            <option key={`order${id}`} value={id}>
+              {order_number}
+            </option>
           ))}
         </datalist>
       </div>

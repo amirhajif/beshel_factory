@@ -24,6 +24,7 @@ const Report = ({ params }) => {
       const result = response.data.data;
       setData({
         id: result?.id,
+        order_number: result?.order?.order_number,
         date: new DateObject(result?.date)
           .convert(persian, persian_fa)
           .format("YYYY/MM/DD"),
@@ -46,8 +47,8 @@ const Report = ({ params }) => {
           result?.status === ReportStatus?.Accepted?.key
             ? ReportStatus?.Accepted?.title
             : result?.status === ReportStatus?.Rejected?.key
-              ? ReportStatus?.Rejected?.title
-              : ReportStatus?.Pending?.title,
+            ? ReportStatus?.Rejected?.title
+            : ReportStatus?.Pending?.title,
       });
     };
 
