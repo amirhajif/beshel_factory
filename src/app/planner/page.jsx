@@ -24,7 +24,7 @@ const Planner = async () => {
   const orders = ordersRequest?.data?.results;
 
   const operatorsRequest = await getOperators()
-  const operators = operatorsRequest?.data?.results;
+  const operators = operatorsRequest?.data?.data;
 
   return (
     <DashboardWrapper navItems={PlannerNavbarItems} >

@@ -2,9 +2,7 @@
 import React, { useEffect, useState } from "react";
 import Button from "../Button";
 import Select from "../Select";
-import StatusOptions from "@/constants/StatusOptions";
 import FilterFields from "@/models/FilterFields";
-import sendNotif from "@/utils/sendNotif";
 import DatePicker from "react-multi-date-picker";
 import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
@@ -14,7 +12,6 @@ import "react-multi-date-picker/styles/colors/red.css";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import Label from "../Label";
-import { TextField } from "@mui/material";
 
 const Filter = ({ options }) => {
   const searchParams = useSearchParams();
@@ -70,10 +67,6 @@ const Filter = ({ options }) => {
     replace(`${pathname}?${params}`);
   };
 
-  // useEffect(() => {
-  //   console.log(options.operators)
-
-  // }, [])
 
   return (
     <form
