@@ -13,22 +13,10 @@ import "react-multi-date-picker/styles/colors/red.css";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import Label from "../Label";
 
+import OrderCategories from "@/constants/OrderCategories";
+
 const Filter = ({ options }) => {
 
-  const categories = [
-    {
-      id: 1,
-      title: 'A'
-    },
-    {
-      id: 2,
-      title: 'B'
-    },
-    {
-      id: 3,
-      title: 'C'
-    },
-  ]
   const searchParams = useSearchParams();
 
   const { replace } = useRouter();
@@ -164,7 +152,7 @@ const Filter = ({ options }) => {
         text="دسته بندی"
         selectClassName="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
         selectId="category"
-        options={categories}
+        options={OrderCategories}
       />
 
       <div className="w-full md:w-1/4 flex gap-2">

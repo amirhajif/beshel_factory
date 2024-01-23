@@ -18,6 +18,8 @@ import sendNotif from '@/utils/sendNotif'
 
 import { useRouter } from 'next/navigation'
 
+import OrderCategories from '@/constants/OrderCategories'
+
 const AddOrderForm = ({
     formClassName
 }) => {
@@ -44,6 +46,13 @@ const AddOrderForm = ({
         let client = formsElements.namedItem(
             AddOrderFormFields?.companyName?.title
         )?.value;
+        let projectName = formsElements.namedItem(
+            AddOrderFormFields?.projectName?.title
+        )?.value
+        let category = formsElements.namedItem(
+            AddOrderFormFields?.category?.title
+        )?.value
+
         let count = formsElements.namedItem(
             AddOrderFormFields?.count?.title
         )?.value
@@ -103,6 +112,26 @@ const AddOrderForm = ({
                 selectClassName="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                 selectId="companyName"
                 options={companies}
+            />
+            {/* project name */}
+            <Select
+                parentClassName="w-full md:w-1/2 px-3 mb-6 md:mb-0"
+                labelClassName="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                forValue="projectName"
+                text="نام پروژه"
+                selectClassName="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                selectId="projectName"
+                options={companies}
+            />
+            {/* category */}
+            <Select
+                parentClassName="w-full md:w-1/2 px-3 mb-6 md:mb-0"
+                labelClassName="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                forValue="category"
+                text="دسته بندی"
+                selectClassName="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                selectId="category"
+                options={OrderCategories}
             />
 
             {/* start date */}
