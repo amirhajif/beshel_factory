@@ -53,10 +53,10 @@ const AddReportForm = ({ machines, orders }) => {
       ).format("YYYY-MM-DD"),
       [AddReportFormFields?.started_at?.title]: new DateObject(
         startTime.convert(gregorian, gregorian_en)
-      ).format("HH:MM:SS"),
+      ).format("HH:MM"),
       [AddReportFormFields?.ended_at?.title]: new DateObject(
         endedTime.convert(gregorian, gregorian_en)
-      ).format("HH:MM:SS"),
+      ).format("HH:MM"),
       order: Number(
         e.target.elements.namedItem(AddReportFormFields?.order?.title).value
       ),

@@ -51,7 +51,7 @@ const Filter = ({ options }) => {
     // set start date at url
     startedAt != ""
       ? params.set(
-        "startedAt",
+        "started_at",
         startedAt.convert(Gregorian, Gregorian_en).format("YYYY-MM-DD")
       )
       : params.delete("startedAt");
@@ -59,7 +59,7 @@ const Filter = ({ options }) => {
     // set finish date at url
     finishedAt != ""
       ? params.set(
-        "finishedAt",
+        "ended_at",
         finishedAt.convert(Gregorian, Gregorian_en).format("YYYY-MM-DD")
       )
       : params.delete("finishedAt");

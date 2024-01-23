@@ -52,6 +52,8 @@ const PrintPage = async ({ params }) => {
                         <div className='border-l-2 border-slate-800 w-1/6 text-center'>تعداد</div>
                         <div className='w-1/6 text-center'>{order.count}</div>
                     </div>
+                    <div className='flex border-2 border-slate-900 items-stretch justify-between border-t-0 h-10'>
+                    </div>
                 </div>
             </div>
 
