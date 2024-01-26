@@ -7,6 +7,7 @@ import Routes from "@/constants/Routes";
 import getMachines from "@/apis/getMachines";
 import getOrders from "@/apis/getOrders";
 import { getOperators } from "@/apis/getOperators";
+import getProjects from "@/apis/getProjects";
 
 
 const Planner = async () => {

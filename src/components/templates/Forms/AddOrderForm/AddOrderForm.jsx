@@ -13,21 +13,16 @@ import Button from "@/components/shared/Button";
 import Label from "@/components/shared/Label";
 import TextField from "@/components/shared/TextField";
 import AddOrderFormFields from '@/models/AddOrderFormFields'
-import { getAllParts, getAllClients, addOrder } from '@/apis/sampleApi'
 import sendNotif from '@/utils/sendNotif'
 
 import { useRouter } from 'next/navigation'
 
 import OrderCategories from '@/constants/OrderCategories'
+import addOrder from '@/apis/addOrder'
 
-const AddOrderForm = ({
-    formClassName
-}) => {
+const AddOrderForm = ({ formClassName, options }) => {
     let [started_at, setStarted_at] = useState('')
     let [ended_at, setEnded_at] = useState('')
-    const [parts, setParts] = useState([])
-    const [companies, setCompanies] = useState([])
-
     const router = useRouter()
 
     const resetForm = () => {
@@ -76,20 +71,6 @@ const AddOrderForm = ({
         resetForm()
     }
 
-    useEffect(() => {
-        // getParts
-        const cachedParts = getAllParts()
-        cachedParts.then((res) => {
-            setParts(res.data.data)
-        })
-
-        // get Companies(clients)
-        const cachedCompanies = getAllClients()
-        cachedCompanies.then((res) => {
-            setCompanies(res.data.data)
-        })
-
-    }, [])
 
     return (
         <form className={formClassName} onSubmit={handleSubmit} id='form' >
@@ -101,7 +82,7 @@ const AddOrderForm = ({
                 text=" نام قطعه"
                 selectClassName="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                 selectId="partName"
-                options={parts}
+                options={options.parts}
             />
             {/* client */}
             <Select
@@ -111,7 +92,7 @@ const AddOrderForm = ({
                 text="نام شرکت"
                 selectClassName="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                 selectId="companyName"
-                options={companies}
+                options={options.clients}
             />
             {/* project name */}
             <Select
@@ -121,7 +102,7 @@ const AddOrderForm = ({
                 text="نام پروژه"
                 selectClassName="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                 selectId="projectName"
-                options={companies}
+                options={options.projects}
             />
             {/* category */}
             <Select

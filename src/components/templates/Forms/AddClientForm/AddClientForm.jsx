@@ -1,9 +1,9 @@
 "use client"
-import { addClient } from '@/apis/sampleApi'
 import Button from '@/components/shared/Button'
 import InputSection from '@/components/shared/InputSection'
 import React from 'react'
 import sendNotif from '@/utils/sendNotif'
+import addClient from '@/apis/addClient'
 const AddClientForm = ({
     formClassName,
     parentClassName,

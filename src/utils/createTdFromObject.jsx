@@ -7,7 +7,6 @@ export const createTdFromObject = (
   speceficComponent,
   className = "whitespace-nowrap px-6 py-4"
 ) => {
-  console.log(object)
   let datas = [<td className={`${className} font-bold`}>{index + 1}</td>];
   for (const key in object)
     if (key === speceficKey && object[key] === speceficValue)

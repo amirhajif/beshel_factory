@@ -1,5 +1,5 @@
 "use client"
-import { addPart } from '@/apis/sampleApi'
+import addPart from '@/apis/addPart'
 import Button from '@/components/shared/Button'
 import InputSection from '@/components/shared/InputSection'
 import sendNotif from '@/utils/sendNotif'

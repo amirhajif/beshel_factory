@@ -1,14 +1,14 @@
 export const OrderCategories = [
     {
-        id: 1,
+        id: 'a',
         title: 'A'
     },
     {
-        id: 2,
+        id: 'b',
         title: 'B'
     },
     {
-        id: 3,
+        id: 'c',
         title: 'C'
     }
 ]
