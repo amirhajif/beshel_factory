@@ -3,15 +3,16 @@ import React from "react";
 import Button from "@/components/shared/Button";
 // import addOperator from "@/apis/addOperator";
 import sendNotif from "@/utils/sendNotif";
+import { addProject } from "@/apis/addProject";
 
 const AddProjectForm = () => {
     const handleFormSubmit = async (e) => {
         e.preventDefault();
         let formsElements = e.target.elements;
 
-        let companyName = formsElements.namedItem('projectName')?.value
+        let title = formsElements.namedItem('title')?.value
         try {
-            // await addOperator(data);
+            await addProject({ title: title })
             sendNotif("با موفقیت ساخته شد.", "success");
         } catch (err) {
             sendNotif("خطایی رخ داد.", "error");
@@ -27,8 +28,8 @@ const AddProjectForm = () => {
             <input
                 className="p-3 rounded-lg"
                 type="text"
-                name="projectName"
-                id="projectName"
+                name="title"
+                id="title"
                 placeholder="نام پروژه"
             />
             <Button className="bg-transparent hover:bg-green-500 w-full text-green-700 font-semibold hover:text-white mt-6  py-3 px-4 border border-green-500 hover:border-transparent rounded">
