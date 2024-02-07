@@ -7,6 +7,9 @@ const nextConfig = {
     */
     ignoreDuringBuilds: true,
   },
+  env: {
+    URL_PREFIX: "https://inv.liara.run/api/"
+  }
 };
 
 module.exports = nextConfig;

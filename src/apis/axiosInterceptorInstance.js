@@ -3,7 +3,7 @@ import Cookies from 'js-cookie';
 
 
 const axiosInterceptorInstance = axios.create({
-    baseURL: 'https://inv.liara.run/api/', // Replace with your API base URL
+    baseURL: process.env.URL_PREFIX// Replace with your API base URL
 });
 
 axiosInterceptorInstance.interceptors.request.use(request => {
