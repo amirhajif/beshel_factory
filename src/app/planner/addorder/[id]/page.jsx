@@ -12,7 +12,7 @@ const PrintPage = async ({ params }) => {
   const { id } = params;
   const orderRequest = await getOrderById(id);
   const order = orderRequest?.data?.data;
-  console.log(order);
+  // console.log(order);
   return (
     <>
       <div className={`flex justify-center my-2 gap-2 ${Styles.noPrint}`}>
@@ -41,7 +41,7 @@ const PrintPage = async ({ params }) => {
               نام پروژه
             </div>
             <div className="text-center border-l-2 border-slate-800 w-1/4 ">
-              {order.project}
+              {order.project.title}
             </div>
             <div className="border-l-2 border-slate-800 w-1/4 text-center">
               دسته بندی
