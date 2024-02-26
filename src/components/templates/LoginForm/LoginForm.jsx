@@ -37,8 +37,8 @@ const LoginForm = () => {
       const response = await login({ username: username, password: password })
       const token = response.data.data
 
-      Cookies.set('token', token.access, { expires: 7, secure: true, sameSite: 'Strict' });
-      Cookies.set('refreshToken', token.refresh, { expires: 7, secure: true, sameSite: 'Strict' });
+      Cookies.set('token', token.access, { expires: 7, secure: false, sameSite: 'Strict' });
+      Cookies.set('refreshToken', token.refresh, { expires: 7, secure: false, sameSite: 'Strict' });
 
 
       const userInfo = await getUserInfo()

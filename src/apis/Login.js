@@ -1,8 +1,9 @@
 import axios from "axios";
-
+const { default: axiosInterceptorInstance } =
+    require("./axiosInterceptorInstance");
 export const login = async (data) => {
     try {
-        return await axios.post("https://inv.liara.run/api/signin/", data);
+        return await axiosInterceptorInstance.post("/signin/", data);
     } catch (error) {
         throw new Error(error);
     }

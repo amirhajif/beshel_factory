@@ -19,10 +19,10 @@ const Planner = async () => {
   );
 
   const machineRequest = await getMachines();
-  const machines = machineRequest?.data?.results;
+  const machines = machineRequest?.data?.data;
 
   const ordersRequest = await getOrders();
-  const orders = ordersRequest?.data?.results;
+  const orders = ordersRequest?.data?.data;
 
   const operatorsRequest = await getOperators()
   const operators = operatorsRequest?.data?.data;

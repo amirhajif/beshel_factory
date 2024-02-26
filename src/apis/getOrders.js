@@ -4,7 +4,7 @@ const {
 
 const getOrders = async () => {
   try {
-    return await axiosInterceptorInstance.get("/orders");
+    return await axiosInterceptorInstance.get("/orders?all_data");
   } catch (error) {
     throw new Error(error);
   }

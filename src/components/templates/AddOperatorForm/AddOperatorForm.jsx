@@ -19,17 +19,16 @@ const AddOperatorForm = () => {
       [AddOperatorFormFields?.CodeMelli?.title]: e.target.elements.namedItem(
         AddOperatorFormFields?.CodeMelli?.title
       )?.value,
+
     };
 
     data = {
       ...data,
-      username: `${
-        e.target.elements.namedItem(AddOperatorFormFields?.FirstName?.title)
+      username: `${e.target.elements.namedItem(AddOperatorFormFields?.FirstName?.title)
+        ?.value
+        } ${e.target.elements.namedItem(AddOperatorFormFields?.LastName?.title)
           ?.value
-      }${
-        e.target.elements.namedItem(AddOperatorFormFields?.LastName?.title)
-          ?.value
-      }`,
+        }`
     };
     try {
       await addOperator(data);

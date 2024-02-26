@@ -14,10 +14,10 @@ const Operator = async () => {
   );
 
   const machineRequest = await getMachines();
-  const machines = machineRequest?.data?.results;
+  const machines = machineRequest?.data?.data;
 
   const ordersRequest = await getOrders();
-  const orders = ordersRequest?.data?.results;
+  const orders = ordersRequest?.data?.data;
 
   return (
     <DashboardWrapper navItems={OperatorNavbarItems}>
