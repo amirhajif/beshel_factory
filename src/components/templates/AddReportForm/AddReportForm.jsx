@@ -25,7 +25,7 @@ import StopCodeGuidance from "../StopCodeGuidance";
 import StopGuidanceCodes from "@/constants/StopGuidanceCodes";
 import { useUserInfos } from "@/store/User";
 
-const AddReportForm = ({ machines, orders }) => {
+const AddReportForm = ({ machines, orders, operators }) => {
   try {
     if (machines && orders) {
     } else throw new Error("Error");
@@ -33,12 +33,11 @@ const AddReportForm = ({ machines, orders }) => {
     sendNotif("خطایی رخ داده", "error");
   }
 
-  console.log(orders);
+  console.log(operators);
 
   let [inputDate, setInputDate] = useState(new DateObject());
   let [startTime, setStartTime] = useState(new DateObject());
   let [endedTime, setEndedTime] = useState(new DateObject());
-  const { info } = useUserInfos();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -47,7 +46,9 @@ const AddReportForm = ({ machines, orders }) => {
 
     data = {
       ...data,
-      [AddReportFormFields?.operator?.title]: Number(info?.id),
+      [AddReportFormFields?.operator?.title]: Number(
+        e.target.elements.namedItem(AddReportFormFields?.operator?.title).value
+      ),
       [AddReportFormFields?.date?.title]: new DateObject(
         inputDate.convert(gregorian, gregorian_en)
       ).format("YYYY-MM-DD"),
@@ -101,11 +102,10 @@ const AddReportForm = ({ machines, orders }) => {
       ),
     };
 
-    e.target.reset();
-
     try {
       await addReport(data);
       sendNotif("با موفقیت ایجاد شد", "success");
+      e.target.reset();
     } catch (err) {
       sendNotif("خطایی رخ داد", "error");
     }
@@ -117,6 +117,29 @@ const AddReportForm = ({ machines, orders }) => {
       <div className="w-full my-2">
         <StopCodeGuidance />
       </div>
+
+      <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 ">
+        <Label
+          className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+          forValue={AddReportFormFields?.operator?.title}
+          text={AddReportFormFields?.operator?.placeholder}
+        />
+        <input
+          className="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+          list={AddReportFormFields?.operator?.listId}
+          name={AddReportFormFields?.operator?.title}
+          id={AddReportFormFields?.operator?.title}
+          placeholder={AddReportFormFields?.operator?.placeholder}
+        />
+        <datalist id={AddReportFormFields?.operator?.listId}>
+          {operators.map(({ id, title }) => (
+            <option key={`operator${id}`} value={id}>
+              {title}
+            </option>
+          ))}
+        </datalist>
+      </div>
+
       <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 ">
         <Label
           className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"

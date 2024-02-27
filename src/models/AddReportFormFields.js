@@ -12,7 +12,12 @@ export const AddReportFormFields = Object.freeze({
   ended_at: { title: "ended_at", placeholder: "زمان پایان" },
   started_at: { title: "started_at", placeholder: "زمان شروع" },
   date: { title: "date", placeholder: "تاریخ" },
-  operator: { title: "operator", placeholder: "شناسه اپراتور" },
+
+  operator: {
+    title: "operator",
+    placeholder: "اپراتور",
+    listId: "operatorsId",
+  },
   machine: { title: "machine", placeholder: "ماشین", listId: "machinesId" },
 
   standard_time: { title: "standard_time", placeholder: "St(m)" },
