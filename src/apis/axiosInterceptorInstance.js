@@ -23,13 +23,20 @@ axiosInterceptorInstance.interceptors.response.use(response => {
     if (error.response.status === 401 && !originalRequest._retry) {
         originalRequest._retry = true;
         return refreshToken().then(res => {
-            if (res.status === 200) {
+            console.log(res)
+            if (res.status === 200 || res.status === 201) {
                 const { access } = res.data.data;
                 storeToken(access); // Store the new token
                 axiosInterceptorInstance.defaults.headers.common['Authorization'] = `Bearer ${access}`;
                 originalRequest.headers['Authorization'] = `Bearer ${access}`;
                 return axiosInterceptorInstance(originalRequest); // Retry the original request with the new token
             }
+        }).catch((err) => {
+            console.log("first")
+            Cookies.remove('token')
+            Cookies.remove('refreshToken')
+            localStorage.removeItem("userInfo")
+            document.location.href = "/";
         });
     }
     return Promise.reject(error);
@@ -37,12 +44,13 @@ axiosInterceptorInstance.interceptors.response.use(response => {
 
 
 function storeToken(token) {
-    Cookies.set('token', token, { expires: 7, secure: true, sameSite: 'Strict' }); // Expires in 1 day
+    Cookies.set('token', token, { expires: 7, secure: false, sameSite: 'Strict' }); // Expires in 1 day
 }
 
 function refreshToken() {
     const refreshToken = Cookies.get('refreshToken');
-    return axiosInterceptorInstance.post('signin/token/refresh/', { refresh: refreshToken });
+    const data = axios.post(`${process.env.URL_PREFIX}signin/token/refresh/`, { refresh: refreshToken });
+    return data
 }
 
 
