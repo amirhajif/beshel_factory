@@ -8,7 +8,9 @@ export const addOrder = async (data) => {
             'started_at': data.started_at,
             'ended_at': data.ended_at,
             "part": data.part,
-            "client": data.client
+            "client": data.client,
+            "project": data.project,
+            "category": data.category
         })
         return response.data
     } catch (error) {

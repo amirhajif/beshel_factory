@@ -57,7 +57,9 @@ const AddOrderForm = ({ formClassName, options }) => {
             'started_at': started_at.convert(Gregorian, Gregorian_en).format("YYYY-MM-DD"),
             'ended_at': ended_at.convert(Gregorian, Gregorian_en).format("YYYY-MM-DD"),
             "part": part,
-            "client": client
+            "client": client,
+            "category": category,
+            "project": projectName
         })
 
         if (response != undefined) {
