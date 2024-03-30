@@ -12,7 +12,6 @@ const PrintPage = async ({ params }) => {
   const { id } = params;
   const orderRequest = await getOrderById(id);
   const order = orderRequest?.data?.data;
-  // console.log(order);
   return (
     <>
       <div className={`flex justify-center my-2 gap-2 ${Styles.noPrint}`}>
@@ -24,7 +23,7 @@ const PrintPage = async ({ params }) => {
         <Button
           class="bg-red-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center"
           onClickCallback={() =>
-            (location.href = "http://localhost:3000/planner/addorder")
+            window.history.back()
           }>
           بازگشت
         </Button>
