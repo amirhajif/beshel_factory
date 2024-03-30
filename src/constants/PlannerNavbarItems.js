@@ -1,4 +1,5 @@
 import AddBoxIcon from "@mui/icons-material/AddBox";
+import SummarizeIcon from '@mui/icons-material/Summarize';
 import AssessmentIcon from "@mui/icons-material/Assessment";
 import { grey } from "@mui/material/colors";
 
@@ -14,6 +15,12 @@ export const PlannerNavbarItems = [
     link: "افزودن سفارش",
     to: "/planner/addorder",
     icon: <AddBoxIcon sx={{ color: grey[50] }} />,
+  },
+  {
+    id: 7,
+    link: " سفارشات",
+    to: "/planner/orders",
+    icon: <SummarizeIcon sx={{ color: grey[50] }} />,
   },
   {
     id: 3,
