@@ -80,7 +80,7 @@ const Filter = ({ options }) => {
       onSubmit={onSubmit}>
 
       {/* select for order_number */}
-      <Select
+      {/* <Select
         parentClassName="w-full md:w-1/4 "
         labelClassName="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
         forValue="order_number"
@@ -89,10 +89,31 @@ const Filter = ({ options }) => {
         selectId="order_number"
         options={options.orders}
         isOrder={true}
-      />
+      /> */}
+      <div className="w-full md:w-1/4 px-3 mb-6 md:mb-0 ">
+        <Label
+          className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+          forValue='order_number'
+          text='کد سفارش-انگلیسی'
+        />
+        <input
+          className="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+          list='order_number_list'
+          name='order_number'
+          id='order_number'
+          placeholder='کد سفارش'
+        />
+        <datalist id='order_number_list'>
+          {options.orders.map(({ order_number }) => (
+            <option key={`operator${order_number}`} value={order_number}>
+              {order_number}
+            </option>
+          ))}
+        </datalist>
+      </div>
 
       {/* select for operator */}
-      <Select
+      {/* <Select
         parentClassName="w-full md:w-1/4 "
         labelClassName="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
         forValue="operator_id"
@@ -100,7 +121,29 @@ const Filter = ({ options }) => {
         selectClassName="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
         selectId="operator_id"
         options={options.operators}
-      />
+      /> */}
+
+      <div className="w-full md:w-1/4 px-3 mb-6 md:mb-0 ">
+        <Label
+          className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+          forValue='operator_id'
+          text='اپراتور'
+        />
+        <input
+          className="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+          list='operator_id_list'
+          name='operator_id'
+          id='operator_id'
+          placeholder='اپراتور'
+        />
+        <datalist id='operator_id_list'>
+          {options.operators.map(({ id, title }) => (
+            <option key={`operator${id}`} value={id}>
+              {title}
+            </option>
+          ))}
+        </datalist>
+      </div>
 
       <Select
         parentClassName="w-full md:w-1/4 "
