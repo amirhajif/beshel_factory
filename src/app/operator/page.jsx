@@ -4,6 +4,7 @@ import OperatorNavbarItems from "@/constants/OperatorNavbarItems";
 import AddReportForm from "@/components/templates/AddReportForm";
 import getMachines from "@/apis/getMachines";
 import getOrders from "@/apis/getOrders";
+import getParts from "@/apis/getParts";
 import { getOperators } from "@/apis/getOperators";
 
 const Operator = async () => {
@@ -23,6 +24,9 @@ const Operator = async () => {
   const operatorsRequest = await getOperators();
   const operators = operatorsRequest?.data?.data;
 
+  const partsRequest = await getParts();
+  const parts = partsRequest?.data?.data;
+
   return (
     <DashboardWrapper navItems={OperatorNavbarItems}>
       <DashboardContent>
@@ -30,6 +34,7 @@ const Operator = async () => {
           machines={machines}
           orders={orders}
           operators={operators}
+          parts={parts}
         />
       </DashboardContent>
     </DashboardWrapper>

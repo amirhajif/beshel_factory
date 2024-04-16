@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 export const AddReportFormSchema = z.object({
+  report_part_codes: z.coerce.string(),
   standard_time: z.coerce.number(),
   ended_at: z.coerce.string(),
   defective_parts_count: z.coerce.number(),
@@ -64,6 +65,15 @@ export const AddReportFormFields = Object.freeze({
   stop_controller_4_time: {
     title: "stop_controller_4_time",
     placeholder: "زمان کنترل توقف 4",
+  },
+  report_part_codes: {
+    title: "report_part_codes",
+    placeholder: "شماره قطعات (با فاصله و انگلیسی)",
+  },
+  part: {
+    title: "part",
+    placeholder: "نام قطعه",
+    listId: "partsId",
   },
 });
 

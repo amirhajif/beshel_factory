@@ -22,6 +22,7 @@ const Report = ({ params }) => {
     const fetchData = async (id) => {
       let response = await getReportById(id);
       const result = response.data.data;
+      console.log(result);
       setData({
         id: result?.id,
         order_number: result?.order?.order_number,
@@ -32,6 +33,10 @@ const Report = ({ params }) => {
         ended_at: result?.ended_at,
         operator: `${result?.operator?.first_name}  ${result?.operator?.last_name}`,
         machine: result?.machine?.title,
+        part: result?.part?.title,
+        report_part_codes: result?.report_part_codes.map(
+          ({ number }) => `${number} `
+        ),
         standard_time: result?.standard_time,
         intact_parts_count: result?.intact_parts_count,
         defective_parts_count: result?.defective_parts_count,

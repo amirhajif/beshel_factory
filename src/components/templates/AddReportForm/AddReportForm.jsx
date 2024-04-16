@@ -33,8 +33,6 @@ const AddReportForm = ({ machines, orders, operators }) => {
     sendNotif("خطایی رخ داده", "error");
   }
 
-  console.log(operators);
-
   let [inputDate, setInputDate] = useState(new DateObject());
   let [startTime, setStartTime] = useState(new DateObject());
   let [endedTime, setEndedTime] = useState(new DateObject());
@@ -43,6 +41,12 @@ const AddReportForm = ({ machines, orders, operators }) => {
     e.preventDefault();
 
     let { data } = createObjectFromForm(e.target.elements, AddReportFormSchema);
+    data[AddReportFormFields?.report_part_codes?.title] = data[
+      AddReportFormFields?.report_part_codes?.title
+    ]
+      .trim()
+      .split(" ")
+      .map((number) => ({ number: Number(number) }));
 
     data = {
       ...data,
@@ -99,6 +103,9 @@ const AddReportForm = ({ machines, orders, operators }) => {
         e.target.elements.namedItem(
           AddReportFormFields?.stop_controller_4_time?.title
         ).value
+      ),
+      part: Number(
+        e.target.elements.namedItem(AddReportFormFields?.part?.title).value
       ),
     };
 
@@ -234,6 +241,29 @@ const AddReportForm = ({ machines, orders, operators }) => {
           plugins={[<TimePicker hideSeconds position="bottom" />]}
         />
       </div>
+
+      <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 ">
+        <Label
+          className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+          forValue={AddReportFormFields?.part?.title}
+          text={AddReportFormFields?.part?.placeholder}
+        />
+        <input
+          className="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+          list={AddReportFormFields?.part?.listId}
+          name={AddReportFormFields?.part?.title}
+          id={AddReportFormFields?.part?.title}
+          placeholder={AddReportFormFields?.part?.placeholder}
+        />
+        <datalist id={AddReportFormFields?.part?.listId}>
+          {machines.map(({ id, title }) => (
+            <option key={`part${id}`} value={id}>
+              {title}
+            </option>
+          ))}
+        </datalist>
+      </div>
+
       {AddReportFormSchema?.keyof()?._def?.values.map(
         (_key) =>
           _key !== AddReportFormFields?.ended_at?.title && (

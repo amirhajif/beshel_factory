@@ -7,8 +7,8 @@ import Routes from "@/constants/Routes";
 import getMachines from "@/apis/getMachines";
 import getOrders from "@/apis/getOrders";
 import { getOperators } from "@/apis/getOperators";
+import getParts from "@/apis/getParts";
 import getProjects from "@/apis/getProjects";
-
 
 const Planner = async () => {
   const DashboardWrapper = dynamic(
@@ -24,14 +24,23 @@ const Planner = async () => {
   const ordersRequest = await getOrders();
   const orders = ordersRequest?.data?.data;
 
-  const operatorsRequest = await getOperators()
+  const operatorsRequest = await getOperators();
   const operators = operatorsRequest?.data?.data;
 
+  const partsRequest = await getParts();
+  const parts = partsRequest?.data?.data;
   return (
-    <DashboardWrapper navItems={PlannerNavbarItems} >
+    <DashboardWrapper navItems={PlannerNavbarItems}>
       <DashboardContent>
         <div className="costume-scroll overflow-scroll xs:w-[100%] w-[95%] h-[90%]">
-          <Filter options={{ machines: machines, orders: orders, operators: operators }} />
+          <Filter
+            options={{
+              machines: machines,
+              orders: orders,
+              operators: operators,
+              parts: parts,
+            }}
+          />
           <ReportMiniTable baseRoute={Routes?.Planner} />
         </div>
       </DashboardContent>
