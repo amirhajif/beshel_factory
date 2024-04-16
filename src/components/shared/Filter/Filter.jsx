@@ -9,56 +9,14 @@ import persian_fa from "react-date-object/locales/persian_fa";
 import Gregorian from "react-date-object/calendars/gregorian";
 import Gregorian_en from "react-date-object/locales/gregorian_en";
 import "react-multi-date-picker/styles/colors/red.css";
-import Slider from "@mui/material/Slider";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import Label from "../Label";
 
 import OrderCategories from "@/constants/OrderCategories";
 
-const marks = [
-  {
-    value: 0,
-    label: "0",
-  },
-  {
-    value: 25,
-    label: "25",
-  },
-  {
-    value: 50,
-    label: "50",
-  },
-  {
-    value: 75,
-    label: "75",
-  },
-  {
-    value: 100,
-    label: "100",
-  },
-];
-
-const generateCodePartRangeQuery = (range) => {
-  let query = "";
-
-  for (let index = range[0]; index < range[1] + 1; index++)
-    query += `${index},`;
-
-  query = query.replace(/,\s*$/, "").trim();
-
-  return query;
-};
-
 const Filter = ({ options }) => {
   const searchParams = useSearchParams();
-  const [doesPartCodeRangeChange, setPartCodeRangeChange] = useState(false);
-
-  const [partCodeRange, setPartCodeRange] = useState([0, 10]);
-  const handlePartCodeChange = (event, newValue) => {
-    setPartCodeRangeChange(true);
-    setPartCodeRange(newValue);
-  };
   const { replace } = useRouter();
   const pathname = usePathname();
 
@@ -68,8 +26,6 @@ const Filter = ({ options }) => {
   const resetForm = () => {
     setStartedAt("");
     setFinishedAt("");
-    setPartCodeRangeChange(false);
-    setPartCodeRange([0, 10]);
     replace(`${pathname}`);
   };
 
@@ -90,15 +46,15 @@ const Filter = ({ options }) => {
       FilterFields?.order_category?.title
     )?.value;
     let part_id = formsElements.namedItem(FilterFields?.part_id?.title)?.value;
-
+    let part_codes = formsElements.namedItem(
+      FilterFields?.part_codes?.title
+    ).value;
     const params = new URLSearchParams(searchParams);
 
     //set part codes in filter
-    if (doesPartCodeRangeChange) {
-      let part_codes = generateCodePartRangeQuery(partCodeRange);
-      params.set("part_codes", part_codes);
-    }
-
+    part_codes != ""
+      ? params.set("part_codes", part_codes.trim().replace(/\s/g, ","))
+      : params.delete("part_codes");
     //set part id at url
     part_id != "" ? params.set("part_id", part_id) : params.delete("part_id");
     // set category at url
@@ -285,15 +241,13 @@ const Filter = ({ options }) => {
         <Label
           className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
           forValue="parts_codes"
-          text="قطعات"
+          text="شماره قطعات"
         />
-        <Slider
-          defaultValue={20}
-          step={5}
-          valueLabelDisplay="on"
-          marks={marks}
-          value={partCodeRange}
-          onChange={handlePartCodeChange}
+        <input
+          className="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+          name="part_codes"
+          id="part_codes"
+          placeholder="شماره قطعات (با فاصله و انگلیسی)"
         />
       </div>
       <div className="w-full md:w-1/4 flex gap-2">
