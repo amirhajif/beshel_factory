@@ -77,17 +77,17 @@ const Filter = ({ options }) => {
     // set start date at url
     startedAt != ""
       ? params.set(
-          "started_at",
-          startedAt.convert(Gregorian, Gregorian_en).format("YYYY-MM-DD")
-        )
+        "started_at",
+        startedAt.convert(Gregorian, Gregorian_en).format("YYYY-MM-DD")
+      )
       : params.delete("started_at");
 
     // set finish date at url
     finishedAt != ""
       ? params.set(
-          "ended_at",
-          finishedAt.convert(Gregorian, Gregorian_en).format("YYYY-MM-DD")
-        )
+        "ended_at",
+        finishedAt.convert(Gregorian, Gregorian_en).format("YYYY-MM-DD")
+      )
       : params.delete("ended_at");
 
     replace(`${pathname}?${params}`);
@@ -244,6 +244,7 @@ const Filter = ({ options }) => {
           text="شماره قطعات"
         />
         <input
+          dir="ltr"
           className="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
           name="part_codes"
           id="part_codes"
