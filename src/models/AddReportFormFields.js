@@ -5,6 +5,7 @@ export const AddReportFormSchema = z.object({
   ended_at: z.coerce.string(),
   defective_parts_count: z.coerce.number(),
   intact_parts_count: z.coerce.number(),
+  report_part_codes: z.coerce.string(),
 });
 
 export const AddReportFormFields = Object.freeze({
@@ -67,7 +68,7 @@ export const AddReportFormFields = Object.freeze({
   },
   report_part_codes: {
     title: "report_part_codes",
-    placeholder: "شماره قطعات",
+    placeholder: "شماره قطعات (با فاصله و انگلیسی)",
   },
   part: {
     title: "part",

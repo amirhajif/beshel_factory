@@ -24,65 +24,29 @@ import ReportStatus from "@/constants/ReportStatus";
 import StopCodeGuidance from "../StopCodeGuidance";
 import StopGuidanceCodes from "@/constants/StopGuidanceCodes";
 import { useUserInfos } from "@/store/User";
-import Slider from "@mui/material/Slider";
 
-const marks = [
-  {
-    value: 0,
-    label: "0",
-  },
-  {
-    value: 250,
-    label: "25",
-  },
-  {
-    value: 500,
-    label: "50",
-  },
-  {
-    value: 750,
-    label: "75",
-  },
-  {
-    value: 1000,
-    label: "100",
-  },
-];
-
-const AddReportForm = ({ machines, orders, operators, parts }) => {
+const AddReportForm = ({ machines, orders, operators }) => {
   try {
     if (machines && orders) {
     } else throw new Error("Error");
   } catch (err) {
     sendNotif("خطایی رخ داده", "error");
   }
-  const [partCodeRange, setPartCodeRange] = useState([0, 200]);
-  const handlePartCodeChange = (event, newValue) => {
-    setPartCodeRange(newValue);
-  };
+
   let [inputDate, setInputDate] = useState(new DateObject());
   let [startTime, setStartTime] = useState(new DateObject());
   let [endedTime, setEndedTime] = useState(new DateObject());
 
-  const generateRangeNumbers = (partCodeRange) => {
-    let numbers = [];
-    for (let i = partCodeRange[0]; i < partCodeRange[1] + 1; i++) {
-      numbers.push({ number: i });
-    }
-
-    return numbers;
-  };
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     let { data } = createObjectFromForm(e.target.elements, AddReportFormSchema);
-
-    // data[AddReportFormFields?.report_part_codes?.title] = data[
-    //   AddReportFormFields?.report_part_codes?.title
-    // ]
-    //   .trim()
-    //   .split(" ")
-    //   .map((number) => ({ number: Number(number) }));
+    data[AddReportFormFields?.report_part_codes?.title] = data[
+      AddReportFormFields?.report_part_codes?.title
+    ]
+      .trim()
+      .split(" ")
+      .map((number) => ({ number: Number(number) }));
 
     data = {
       ...data,
@@ -143,7 +107,6 @@ const AddReportForm = ({ machines, orders, operators, parts }) => {
       part: Number(
         e.target.elements.namedItem(AddReportFormFields?.part?.title).value
       ),
-      report_part_codes: generateRangeNumbers(partCodeRange),
     };
 
     try {
@@ -293,29 +256,12 @@ const AddReportForm = ({ machines, orders, operators, parts }) => {
           placeholder={AddReportFormFields?.part?.placeholder}
         />
         <datalist id={AddReportFormFields?.part?.listId}>
-          {parts.map(({ id, title }) => (
+          {machines.map(({ id, title }) => (
             <option key={`part${id}`} value={id}>
               {title}
             </option>
           ))}
         </datalist>
-      </div>
-
-      <div className="w-full px-3 mb-6 md:mb-0 ">
-        <Label
-          className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-8"
-          forValue={AddReportFormFields?.report_part_codes?.title}
-          text={AddReportFormFields?.report_part_codes?.placeholder}
-        />
-        <Slider
-          step={10}
-          valueLabelDisplay="on"
-          marks
-          min={0}
-          max={1000}
-          value={partCodeRange}
-          onChange={handlePartCodeChange}
-        />
       </div>
 
       {AddReportFormSchema?.keyof()?._def?.values.map(
