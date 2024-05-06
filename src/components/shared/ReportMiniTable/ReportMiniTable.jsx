@@ -24,7 +24,7 @@ const ReportMiniTable = ({ baseRoute }) => {
     const fetchData = async () => {
       let response = await getReports(searchParams.toString());
       setData(
-        response.data.results
+        response.data.data
           .map((result) => ({
             شناسه: result?.id,
             کد_سفارش: result?.order?.order_number,
