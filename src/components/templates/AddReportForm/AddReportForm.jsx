@@ -25,7 +25,7 @@ import StopCodeGuidance from "../StopCodeGuidance";
 import StopGuidanceCodes from "@/constants/StopGuidanceCodes";
 import { useUserInfos } from "@/store/User";
 
-const AddReportForm = ({ machines, orders, operators }) => {
+const AddReportForm = ({ machines, orders, operators, parts }) => {
   try {
     if (machines && orders) {
     } else throw new Error("Error");
@@ -256,7 +256,7 @@ const AddReportForm = ({ machines, orders, operators }) => {
           placeholder={AddReportFormFields?.part?.placeholder}
         />
         <datalist id={AddReportFormFields?.part?.listId}>
-          {machines.map(({ id, title }) => (
+          {parts.map(({ id, title }) => (
             <option key={`part${id}`} value={id}>
               {title}
             </option>
