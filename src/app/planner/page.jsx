@@ -1,6 +1,5 @@
 import DashboardContent from "@/components/layouts/DashboardContent";
 import dynamic from "next/dynamic";
-import ReportMiniTable from "@/components/shared/ReportMiniTable";
 import PlannerNavbarItems from "@/constants/PlannerNavbarItems";
 import Filter from "@/components/shared/Filter";
 import Routes from "@/constants/Routes";
@@ -9,6 +8,7 @@ import getOrders from "@/apis/getOrders";
 import { getOperators } from "@/apis/getOperators";
 import getParts from "@/apis/getParts";
 import getProjects from "@/apis/getProjects";
+import ReportMiniTablePlanner from "@/components/shared/ReportMiniTablePlanner";
 
 const Planner = async () => {
   const DashboardWrapper = dynamic(
@@ -41,7 +41,7 @@ const Planner = async () => {
               parts: parts,
             }}
           />
-          <ReportMiniTable baseRoute={Routes?.Planner} />
+          <ReportMiniTablePlanner baseRoute={Routes?.Planner} />
         </div>
       </DashboardContent>
     </DashboardWrapper>
