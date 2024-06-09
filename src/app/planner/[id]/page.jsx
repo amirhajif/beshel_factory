@@ -22,7 +22,6 @@ const Report = ({ params }) => {
     const fetchData = async (id) => {
       let response = await getReportById(id);
       const result = response.data.data;
-      console.log(result);
       setData({
         id: result?.id,
         order_number: result?.order?.order_number,
@@ -52,8 +51,8 @@ const Report = ({ params }) => {
           result?.status === ReportStatus?.Accepted?.key
             ? ReportStatus?.Accepted?.title
             : result?.status === ReportStatus?.Rejected?.key
-            ? ReportStatus?.Rejected?.title
-            : ReportStatus?.Pending?.title,
+              ? ReportStatus?.Rejected?.title
+              : ReportStatus?.Pending?.title,
       });
     };
 

@@ -40,6 +40,7 @@ const Report = ({ params }) => {
 
       setData({
         id: result?.id,
+        order_number: result?.order?.order_number,
         date: new DateObject(result?.date)
           .convert(persian, persian_fa)
           .format("YYYY/MM/DD"),
@@ -47,6 +48,10 @@ const Report = ({ params }) => {
         ended_at: result?.ended_at,
         operator: `${result?.operator?.first_name}  ${result?.operator?.last_name}`,
         machine: result?.machine?.title,
+        part: result?.part?.title,
+        report_part_codes: result?.report_part_codes.map(
+          ({ number }) => `${number} `
+        ),
         standard_time: result?.standard_time,
         intact_parts_count: result?.intact_parts_count,
         defective_parts_count: result?.defective_parts_count,
@@ -62,8 +67,8 @@ const Report = ({ params }) => {
           result?.status === ReportStatus?.Accepted?.key
             ? ReportStatus?.Accepted?.title
             : result?.status === ReportStatus?.Rejected?.key
-            ? ReportStatus?.Rejected?.title
-            : ReportStatus?.Pending?.title,
+              ? ReportStatus?.Rejected?.title
+              : ReportStatus?.Pending?.title,
       });
     };
 
