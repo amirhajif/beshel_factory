@@ -15,11 +15,16 @@ import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
 import FileDownloadIcon from "@mui/icons-material/FileDownload";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import Box from "@mui/material/Box";
+import { Pagination } from "@mui/material";
+import getReportsForExcelFile from "@/apis/getReportsForExcelFile";
 
 const ReportMiniTable = ({ baseRoute }) => {
   const [data, setData] = useState(null);
   const searchParams = useSearchParams();
   const [count, setCount] = useState(0);
+  const [pageNumber, setPageNumber] = useState(1);
+
   const { replace } = useRouter();
   const pathname = usePathname();
   const limit = 10;
@@ -55,13 +60,49 @@ const ReportMiniTable = ({ baseRoute }) => {
     fetchData();
   }, [searchParams]);
 
-  const handleExcelExport = () => {
-    const modifiedJsonData = data.map((obj) => {
-      const { dummy, ...rest } = obj;
-      return rest;
-    });
+  const handleExcelExport = async () => {
+    let response = await getReportsForExcelFile(searchParams.toString());
+    const result = response.data.data
+      .map((result) => ({
+        شناسه: result?.id,
+        "شماره سفارش": result?.order?.order_number,
+        "تاریخ ثبت گزارش": new DateObject(result?.date)
+          .convert(persian, persian_fa)
+          .format("YYYY/MM/DD"),
+        "ساعت شروع": result?.started_at,
+        "ساعت پایان": result?.ended_at,
+        اپراتور: `${result?.operator?.first_name}  ${result?.operator?.last_name}`,
+        ماشین: result?.machine?.title,
+        قطعه: result?.part?.title,
+        "شماره قطعات": result?.report_part_codes
+          .map(({ number }) => `${number} `)
+          .toString(),
+        "St(m)": result?.standard_time,
+        "تعداد قطعات سالم": result?.intact_parts_count,
+        "تعداد قطعات ناسالم": result?.defective_parts_count,
+        "کنترل توقف کد 1": result?.stop_controller_1_code,
+        "زمان توقف کد 1": result?.stop_controller_1_time,
+        "کنترل توقف کد 2": result?.stop_controller_2_code,
+        "زمان توقف کد 2": result?.stop_controller_2_time,
+        "کنترل توقف کد 3": result?.stop_controller_3_code,
+        "زمان توقف کد 3": result?.stop_controller_3_time,
+        "کنترل توقف کد 4": result?.stop_controller_4_code,
+        "زمان توقف کد 4": result?.stop_controller_4_time,
+        "تایید سرپرست":
+          result?.status === ReportStatus?.Accepted?.key
+            ? ReportStatus?.Accepted?.title
+            : result?.status === ReportStatus?.Rejected?.key
+            ? ReportStatus?.Rejected?.title
+            : ReportStatus?.Pending?.title,
+      }))
+      .reverse();
 
-    const worksheet = XLSX.utils.json_to_sheet(modifiedJsonData);
+    // const modifiedJsonData = data.map((obj) => {
+    //   const { dummy, ...rest } = obj;
+    //   return rest;
+    // });
+
+    const worksheet = XLSX.utils.json_to_sheet(result);
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
 
@@ -77,29 +118,35 @@ const ReportMiniTable = ({ baseRoute }) => {
     saveAs(blob, "data.xlsx");
   };
 
-  const generateButtons = () => {
-    const buttons = [];
+  // const generateButtons = () => {
+  //   const buttons = [];
 
-    let pageCount = Math.ceil(count / limit);
+  //   let pageCount = Math.ceil(count / limit);
 
-    for (let i = 1; i <= pageCount; i++) {
-      buttons.push(
-        <button
-          onClick={() => {
-            const params = new URLSearchParams(searchParams);
-            params.set("page", i);
+  //   for (let i = 1; i <= pageCount; i++) {
+  //     buttons.push(
+  //       <button
+  //         onClick={() => {
+  //           const params = new URLSearchParams(searchParams);
+  //           params.set("page", i);
 
-            replace(`${pathname}?${params}`);
-          }}
-          className="bg-slate-300 text-slate-950 p-3 rounded-xl">
-          {i}
-        </button>
-      );
-    }
+  //           replace(`${pathname}?${params}`);
+  //         }}
+  //         className="bg-slate-300 text-slate-950 p-3 rounded-xl">
+  //         {i}
+  //       </button>
+  //     );
+  //   }
 
-    return buttons;
+  //   return buttons;
+  // };
+  const handlePageNumberChange = (event, value) => {
+    setPageNumber(value);
+    const params = new URLSearchParams(searchParams);
+    params.set("page", value);
+
+    replace(`${pathname}?${params}`);
   };
-
   return (
     <>
       <button
@@ -110,7 +157,21 @@ const ReportMiniTable = ({ baseRoute }) => {
       </button>
       <br />
       <div className="flex gap-3 my-3">
-        {count > limit && generateButtons()}
+        {count > limit && (
+          <Box
+            sx={{
+              margin: "auto",
+              width: "fit-content",
+              alignItems: "center",
+              direction: "ltr",
+            }}>
+            <Pagination
+              count={Math.ceil(count / limit)}
+              page={pageNumber}
+              onChange={handlePageNumberChange}
+            />
+          </Box>
+        )}
       </div>
 
       <table className="text-sm w-[100%]">
