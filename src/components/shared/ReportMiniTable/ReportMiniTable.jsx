@@ -5,7 +5,6 @@ import Button from "@/components/shared/Button";
 import Link from "next/link";
 import MiniReportsMocksData from "@/mocks/MiniReportsMocksData";
 import ReportsTableHeaders from "@/constants/ReportsTableHeaders";
-import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import getReports from "@/apis/getReports";
 import { DateObject } from "react-multi-date-picker";
@@ -15,16 +14,24 @@ import ReportStatus from "@/constants/ReportStatus";
 import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
 import FileDownloadIcon from "@mui/icons-material/FileDownload";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 const ReportMiniTable = ({ baseRoute }) => {
   const [data, setData] = useState(null);
   const searchParams = useSearchParams();
+  const [count, setCount] = useState(0);
+  const { replace } = useRouter();
+  const pathname = usePathname();
+  const limit = 10;
 
   useEffect(() => {
     const fetchData = async () => {
       let response = await getReports(searchParams.toString());
+
+      setCount(response.data.count);
+
       setData(
-        response.data.data
+        response.data.results
           .map((result) => ({
             شناسه: result?.id,
             کد_سفارش: result?.order?.order_number,
@@ -37,8 +44,8 @@ const ReportMiniTable = ({ baseRoute }) => {
               result?.status === ReportStatus?.Accepted?.key
                 ? ReportStatus?.Accepted?.title
                 : result?.status === ReportStatus?.Rejected?.key
-                  ? ReportStatus?.Rejected?.title
-                  : ReportStatus?.Pending?.title,
+                ? ReportStatus?.Rejected?.title
+                : ReportStatus?.Pending?.title,
             dummy: "",
           }))
           .reverse()
@@ -69,6 +76,30 @@ const ReportMiniTable = ({ baseRoute }) => {
 
     saveAs(blob, "data.xlsx");
   };
+
+  const generateButtons = () => {
+    const buttons = [];
+
+    let pageCount = Math.ceil(count / limit);
+
+    for (let i = 1; i <= pageCount; i++) {
+      buttons.push(
+        <button
+          onClick={() => {
+            const params = new URLSearchParams(searchParams);
+            params.set("page", i);
+
+            replace(`${pathname}?${params}`);
+          }}
+          className="bg-slate-300 text-slate-950 p-3 rounded-xl">
+          {i}
+        </button>
+      );
+    }
+
+    return buttons;
+  };
+
   return (
     <>
       <button
@@ -77,6 +108,11 @@ const ReportMiniTable = ({ baseRoute }) => {
         <FileDownloadIcon />
         <span> خروجی اکسل از جدول</span>
       </button>
+      <br />
+      <div className="flex gap-3 my-3">
+        {count > limit && generateButtons()}
+      </div>
+
       <table className="text-sm w-[100%]">
         <thead className="border-b dark:border-neutral-500 text-slate-50 bg-slate-500">
           <tr className="text-center">
@@ -96,8 +132,9 @@ const ReportMiniTable = ({ baseRoute }) => {
             data.map((item, index) => (
               <tr
                 key={`${item["شناسه"]}_index`}
-                className={`border-b dark:border-neutral-500 text-xs text-center ${index % 2 === 1 ? "bg-slate-300" : "bg-slate-100"
-                  }`}>
+                className={`border-b dark:border-neutral-500 text-xs text-center ${
+                  index % 2 === 1 ? "bg-slate-300" : "bg-slate-100"
+                }`}>
                 {createTdFromObject(
                   item,
                   index,

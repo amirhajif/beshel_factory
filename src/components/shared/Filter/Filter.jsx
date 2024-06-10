@@ -51,6 +51,8 @@ const Filter = ({ options }) => {
     ).value;
     const params = new URLSearchParams(searchParams);
 
+    params.delete("page");
+    
     //set part codes in filter
     part_codes != ""
       ? params.set("part_codes", part_codes.trim().replace(/\s/g, ","))
@@ -77,17 +79,17 @@ const Filter = ({ options }) => {
     // set start date at url
     startedAt != ""
       ? params.set(
-        "started_at",
-        startedAt.convert(Gregorian, Gregorian_en).format("YYYY-MM-DD")
-      )
+          "started_at",
+          startedAt.convert(Gregorian, Gregorian_en).format("YYYY-MM-DD")
+        )
       : params.delete("started_at");
 
     // set finish date at url
     finishedAt != ""
       ? params.set(
-        "ended_at",
-        finishedAt.convert(Gregorian, Gregorian_en).format("YYYY-MM-DD")
-      )
+          "ended_at",
+          finishedAt.convert(Gregorian, Gregorian_en).format("YYYY-MM-DD")
+        )
       : params.delete("ended_at");
 
     replace(`${pathname}?${params}`);
